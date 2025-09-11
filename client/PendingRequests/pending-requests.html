@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Pending Requests</title>
+    <link rel="stylesheet" href="pending-requests.css">
+</head>
+<body>
+    <div class="admin-container">
+        
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>BANKING SYSTEM</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="pending-requests.html" class="nav-link active">Pending Requests</a></li>
+                    <li><a href="users.html" class="nav-link">Users</a></li>
+                    <li><a href="account.html" class="nav-link">Account</a></li>
+                    <li><a href="logout.html" class="nav-link logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+
+     
+        <div class="main-content">
+          
+            <header class="header">
+                <h1>Pending Requests</h1>
+                <div class="admin-info">
+                    <span>Welcome, <strong id="adminName">Admin John Doe</strong></span>
+                </div>
+            </header>
+
+         
+            <div class="content-area">
+                <div class="table-container">
+                    <table class="requests-table" id="requestsTable">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Account Type</th>
+                                <th>Date Applied</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestsTableBody">
+                       
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>User Details</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="user-details">
+                    <div class="detail-box">
+                        <label>Username:</label>
+                        <span id="modalUsername"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Email:</label>
+                        <span id="modalEmail"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Date of Birth:</label>
+                        <span id="modalDob"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Occupation:</label>
+                        <span id="modalOccupation"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Aadhar Number:</label>
+                        <span id="modalAadhar"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Mobile Number:</label>
+                        <span id="modalMobile"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Account Type Applied:</label>
+                        <span id="modalAccountType"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Residential Address:</label>
+                        <span id="modalAddress"></span>
+                    </div>
+                    <div class="detail-box comments-box">
+                        <label for="commentsTextarea">Comments:</label>
+                        <textarea id="commentsTextarea" placeholder="Add your comments here..."></textarea>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="pending-requests.js"></script>
+  
+</body>
+</html>
