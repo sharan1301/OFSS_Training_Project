@@ -28,16 +28,18 @@ body {
 }
 
 .sidebar-header {
-    padding: 20px;
-    background-color: white;
+    /* padding: 20px; */
+     padding: 1rem 2rem;
+    background-color: 025;
     border-bottom: 1px solid #4a5f7a;
 }
 
 .sidebar-header h2 {
-    font-size: 18px;
-    font-weight: 600;
+    
+    font-size: 1.6rem;
+    font-weight: bold;
     text-align: center;
-    color: #025;
+    color:white;
 }
 
 .sidebar-nav ul {

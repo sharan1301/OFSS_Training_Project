@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System - User Management</title>
+    <link rel="stylesheet" href="UserDetails.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>BANKING SYSTEM</h1>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item">Dashboard</a></li>
+                <li><a href="#" class="nav-item active" onclick="showUsersList()">Users</a></li>
+                <li><a href="#" class="nav-item" >Pending Requests</a></li>
+                <li><a href="#" class="nav-item">Account</a></li>
+                <li><a href="#" class="nav-item">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Users List Page -->
+            <div id="usersPage" class="page active">
+                <div class="page-header">
+                    <h2>User Management</h2>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search by name or account number..." class="search-input">
+                        <button onclick="searchUsers()" class="search-btn">Search</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Account Number</th>
+                                <th>Account Type</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Dynamic content will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pending Requests Page -->
+            <div id="pendingPage" class="page">
+                <div class="page-header">
+                    <h2>Pending Loan Requests</h2>
+                    <button onclick="showUsersList()" class="back-btn">← Back to Users</button>
+                </div>
+
+                <div class="requests-container">
+                    <div id="pendingRequestsList">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loan Details Modal -->
+            <div id="loanModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeLoanModal()">&times;</span>
+                    <h3>Loan Request Details</h3>
+                    <div id="loanDetails">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="UserDetails.js"></script>
+</body>
+</html>
