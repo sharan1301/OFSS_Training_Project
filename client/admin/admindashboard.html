@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FeinBank Admin Panel</title>
+  <link rel="stylesheet" href="admindashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="sidebar">
+    <h2>🏦 SecureBank</h2>
+    <a href="admindashboard.html" class="nav-link active">📊 Dashboard</a>
+    <a href="../PendingRequests/pending-requests.html" class="nav-link">📋 Pending Requests</a>
+    <a href="../UserDetails/UserDetails.html" class="nav-link">👥 Users</a>
+    <a href="../AdminDetails/admindetails.html" class="nav-link">👤 Admin Details</a>
+   <a href="#" class="nav-link logout" onclick="logout()">🚪 Log Out</a>
+  </nav>
+  
+  <!-- Main content -->
+  <main class="main" id="main-content">
+    <!-- Content will be loaded here dynamically -->
+  </main>
+  
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+  
+  <!-- Load JavaScript -->
+  <script src="admindashboard.js"></script>
+</body>
+</html>
