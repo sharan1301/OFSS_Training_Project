@@ -1,7 +1,7 @@
 let users = [
     {
         id: 1,
-        username: "John Smith",
+        username: "Sachin",
         accountNumber: "ACC001234",
         accountType: "Savings",
         balance: "$15,000",
@@ -11,7 +11,7 @@ let users = [
     },
     {
         id: 2,
-        username: "Sarah Johnson",
+        username: "Johnson",
         accountNumber: "ACC005678",
         accountType: "Checking",
         balance: "$8,500",
@@ -21,7 +21,7 @@ let users = [
     },
     {
         id: 3,
-        username: "Michael Brown",
+        username: "Virat",
         accountNumber: "ACC009012",
         accountType: "Business",
         balance: "$25,000",
@@ -31,7 +31,7 @@ let users = [
     },
     {
         id: 4,
-        username: "Emily Davis",
+        username: "Rahul",
         accountNumber: "ACC003456",
         accountType: "Savings",
         balance: "$12,300",
@@ -41,7 +41,7 @@ let users = [
     },
     {
         id: 5,
-        username: "Robert Wilson",
+        username: "Rohit",
         accountNumber: "ACC007890",
         accountType: "Premium",
         balance: "$45,000",
@@ -55,7 +55,7 @@ let loanRequests = [
     {
         id: 1,
         userId: 1,
-        name: "John Smith",
+        name: "Ramesh",
         accountNumber: "ACC001234",
         balance: "$15,000",
         loanType: "Personal Loan",
@@ -68,7 +68,7 @@ let loanRequests = [
     {
         id: 2,
         userId: 3,
-        name: "Michael Brown",
+        name: "Virat",
         accountNumber: "ACC009012",
         balance: "$25,000",
         loanType: "Business Loan",
@@ -80,14 +80,14 @@ let loanRequests = [
     }
 ];
 
-let allUsers = [...users]; // Store original users for search functionality
+let allUsers = [...users]; 
 
-// Initialize the page
+
 document.addEventListener('DOMContentLoaded', function() {
     showUsersList();
 });
 
-// Show users list page
+
 function showUsersList() {
     document.getElementById('usersPage').classList.add('active');
     document.getElementById('pendingPage').classList.remove('active');
@@ -95,7 +95,7 @@ function showUsersList() {
     displayUsers(users);
 }
 
-// Show pending requests page
+
 function showPendingRequests() {
     document.getElementById('usersPage').classList.remove('active');
     document.getElementById('pendingPage').classList.add('active');
@@ -103,19 +103,19 @@ function showPendingRequests() {
     displayPendingRequests();
 }
 
-// Update active navigation item
+
 function updateActiveNavItem(activeItem) {
-    const navItems = document.querySelectorAll('.nav-item');
+    const navItems = document.querySelectorAll('.nav-link'); // Changed from '.nav-item' to '.nav-link'
     navItems.forEach(item => item.classList.remove('active'));
     
     if (activeItem === 'users') {
-        navItems[1].classList.add('active'); // Users nav item
+        navItems[2].classList.add('active'); // Changed from [1] to [2]
     } else if (activeItem === 'pending') {
-        navItems[2].classList.add('active'); // Pending requests nav item
+        navItems[1].classList.add('active'); // Changed from [2] to [1]
     }
 }
 
-// Display users in table
+
 function displayUsers(usersToShow) {
     const tbody = document.getElementById('usersTableBody');
     tbody.innerHTML = '';
@@ -154,7 +154,7 @@ function displayUsers(usersToShow) {
     });
 }
 
-// Search users
+
 function searchUsers() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
     
@@ -171,7 +171,7 @@ function searchUsers() {
     displayUsers(filteredUsers);
 }
 
-// Add event listener for real-time search
+
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
@@ -179,7 +179,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Toggle freeze account
+function logout() {
+    if (confirm('Are you sure you want to log out?')) {
+        showNotification('Logging out... Goodbye!', 'success');
+        
+        // Simulate logout process
+        setTimeout(() => {
+            // In a real application, you would redirect to login page
+            alert('Redirecting to login page...');
+            // For now, just reload the page or redirect to dashboard
+            window.location.href = '../admin/admindashboard.html';
+        }, 2000);
+    }
+}
 function toggleFreeze(userId) {
     const user = users.find(u => u.id === userId);
     if (user) {
@@ -191,7 +203,7 @@ function toggleFreeze(userId) {
     }
 }
 
-// Toggle card status
+
 function toggleCard(userId) {
     const user = users.find(u => u.id === userId);
     if (user) {
@@ -202,7 +214,7 @@ function toggleCard(userId) {
     }
 }
 
-// View pending loan for specific user
+
 function viewPendingLoan(userId) {
     const loanRequest = loanRequests.find(request => request.userId === userId);
     if (loanRequest) {
@@ -212,7 +224,7 @@ function viewPendingLoan(userId) {
     }
 }
 
-// Display pending loan requests
+
 function displayPendingRequests() {
     const container = document.getElementById('pendingRequestsList');
     container.innerHTML = '';
@@ -282,7 +294,7 @@ function displayPendingRequests() {
     });
 }
 
-// Show loan modal
+
 function showLoanModal(loanRequest) {
     const modal = document.getElementById('loanModal');
     const loanDetails = document.getElementById('loanDetails');
@@ -335,12 +347,12 @@ function showLoanModal(loanRequest) {
     modal.style.display = 'block';
 }
 
-// Close loan modal
+
 function closeLoanModal() {
     document.getElementById('loanModal').style.display = 'none';
 }
 
-// Close modal when clicking outside
+
 window.onclick = function(event) {
     const modal = document.getElementById('loanModal');
     if (event.target === modal) {
@@ -348,53 +360,53 @@ window.onclick = function(event) {
     }
 }
 
-// Approve loan
+
 function approveLoan(loanId) {
     const loanIndex = loanRequests.findIndex(request => request.id === loanId);
     if (loanIndex !== -1) {
         const approvedLoan = loanRequests[loanIndex];
         
-        // Update user's pending loan status
+        
         const user = users.find(u => u.id === approvedLoan.userId);
         if (user) {
             user.pendingLoan = false;
         }
         
-        // Remove from pending requests
+      
         loanRequests.splice(loanIndex, 1);
         
         alert(`Loan request for ${approvedLoan.name} has been approved.`);
         
-        // Refresh displays
+        
         displayPendingRequests();
         displayUsers(users);
     }
 }
 
-// Decline loan
+
 function declineLoan(loanId) {
     const loanIndex = loanRequests.findIndex(request => request.id === loanId);
     if (loanIndex !== -1) {
         const declinedLoan = loanRequests[loanIndex];
         
-        // Update user's pending loan status
+        
         const user = users.find(u => u.id === declinedLoan.userId);
         if (user) {
             user.pendingLoan = false;
         }
         
-        // Remove from pending requests
+        
         loanRequests.splice(loanIndex, 1);
         
         alert(`Loan request for ${declinedLoan.name} has been declined.`);
         
-        // Refresh displays
+        
         displayPendingRequests();
         displayUsers(users);
     }
 }
 
-// View document (placeholder function)
+
 function viewDocument(documentName) {
     alert(`Opening document: ${documentName}\n\nThis would typically open the document in a new window or download it.`);
 }

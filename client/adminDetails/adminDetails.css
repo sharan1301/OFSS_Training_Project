@@ -1,0 +1,442 @@
+/* ===========================
+   ADMIN DETAILS PAGE CSS
+   =========================== */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===========================
+   SIDEBAR NAVIGATION
+   =========================== */
+.sidebar {
+  width: 250px;
+  background: #025;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px 0;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 20px;
+}
+
+.sidebar .nav-link {
+  display: block;
+  padding: 15px 25px;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  margin: 2px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background: rgba(255,255,255,0.1);
+  border-left: 3px solid #fff;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.sidebar .nav-link.logout:hover {
+  background-color: #e74c3c;
+  border-left-color: #c0392b;
+}
+
+/* ===========================
+   MAIN CONTENT AREA
+   =========================== */
+.main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 30px;
+  min-height: 100vh;
+  width: calc(100% - 250px);
+}
+
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* ===========================
+   CONTENT HEADERS
+   =========================== */
+.content-header {
+  background: #049;
+  color: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.content-header h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.content-header p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+/* ===========================
+   PROFILE SECTION
+   =========================== */
+.profile-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+.profile-header {
+  background: #049;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(135deg, #049, #667eea);
+}
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+  opacity: 0.3;
+}
+
+.profile-header .icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.profile-header h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+}
+
+.profile-header .role {
+  background: rgba(255,255,255,0.2);
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 14px;
+  display: inline-block;
+  margin: 20px 0;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.profile-header .last-login {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-top: 15px;
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+}
+
+.account-details {
+  padding: 50px 40px;
+  text-align: center;
+  background: linear-gradient(145deg, #f8f9fa, #ffffff);
+}
+
+.account-details h4 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  position: relative;
+}
+
+.account-details h4::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #049, #667eea);
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.account-details p {
+  margin: 18px 0;
+  font-size: 16px;
+  color: #666;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  border-left: 4px solid #049;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.account-details p:hover {
+  background: rgba(255,255,255,1);
+  transform: translateX(5px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.account-details strong {
+  color: #333;
+  font-weight: 600;
+  min-width: 120px;
+  display: inline-block;
+}
+
+/* ===========================
+   NOTIFICATIONS
+   =========================== */
+.notification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #10ac84, #1dd1a1);
+  color: #fff;
+  padding: 18px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(16, 172, 132, 0.3);
+  font-weight: 600;
+  font-size: 14px;
+  display: none;
+  z-index: 9999;
+  animation: slideInRight 0.5s ease;
+  max-width: 350px;
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(100px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .profile-card {
+    margin: 0 20px;
+  }
+  
+  .account-details {
+    padding: 40px 30px;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main {
+    margin-left: 200px;
+    padding: 20px;
+    width: calc(100% - 200px);
+  }
+  
+  .content-header {
+    padding: 30px 20px;
+  }
+  
+  .content-header h2 {
+    font-size: 24px;
+  }
+  
+  .profile-header .icon {
+    font-size: 60px;
+  }
+  
+  .profile-header h2 {
+    font-size: 28px;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 600px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .main {
+    margin-left: 0;
+    padding: 15px;
+    width: 100%;
+  }
+  
+  .content-header {
+    padding: 25px 15px;
+  }
+  
+  .content-header h2 {
+    font-size: 22px;
+  }
+  
+  .profile-card {
+    margin: 0 10px;
+  }
+  
+  .profile-header {
+    padding: 30px 15px;
+  }
+  
+  .profile-header .icon {
+    font-size: 50px;
+  }
+  
+  .profile-header h2 {
+    font-size: 24px;
+  }
+  
+  .account-details {
+    padding: 30px 20px;
+  }
+  
+  .account-details h4 {
+    font-size: 20px;
+  }
+  
+  .account-details p {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+  
+  .notification {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    max-width: none;
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY & FOCUS STYLES
+   =========================== */
+.sidebar .nav-link:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .profile-card {
+    border: 2px solid #333;
+  }
+  
+  .sidebar {
+    border-right: 2px solid #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===========================
+   PRINT STYLES
+   =========================== */
+@media print {
+  .sidebar {
+    display: none;
+  }
+  
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .notification {
+    display: none;
+  }
+}

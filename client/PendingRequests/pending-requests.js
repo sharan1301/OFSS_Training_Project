@@ -288,6 +288,19 @@ document.addEventListener('click', function(e) {
         handleLogout();
     }
 });
+function logout() {
+    if (confirm('Are you sure you want to log out?')) {
+        showNotification('Logging out... Goodbye!', 'success');
+        
+        // Simulate logout process
+        setTimeout(() => {
+            // In a real application, you would redirect to login page
+            alert('Redirecting to login page...');
+            // For now, just reload the page or redirect to dashboard
+            window.location.href = '../admin/admindashboard.html';
+        }, 2000);
+    }
+}
 
 // // function searchRequests(query) {
 // //     const filteredRequests = pendingRequests.filter(request => 

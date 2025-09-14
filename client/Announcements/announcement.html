@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements - Your Bank</title>
+    <link rel="stylesheet" href="announcement.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>Announcements</h1>
+            <p>Stay updated with our latest news and important notices</p>
+        </header>
+
+        <!-- Main Announcement Banner -->
+        <section class="main-banner urgent">
+            <div class="banner-content">
+                <div class="banner-icon">⚠️</div>
+                <div class="banner-text">
+                    <h2>Scheduled System Maintenance</h2>
+                    <p>Our online banking services will be temporarily unavailable on September 15, 2025, from 10:00 PM to 2:00 AM for system upgrades.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="filter-section">
+            <div class="search-filter-container">
+                <input type="text" id="searchInput" placeholder="Search announcements...">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="policy">Policy Updates</option>
+                    <option value="offers">Offers</option>
+                    <option value="security">Security Updates</option>
+                </select>
+                <select id="dateFilter">
+                    <option value="all">All Dates</option>
+                    <option value="recent">Last 30 Days</option>
+                    <option value="older">Older</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Announcements List -->
+        <section class="announcements-list">
+            <div class="announcement-card urgent" data-category="maintenance" data-date="2025-09-15">
+                <div class="card-header">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-meta">
+                        <span class="category">Maintenance</span>
+                        <span class="date">Sep 15, 2025</span>
+                    </div>
+                </div>
+                <h3>Scheduled System Maintenance</h3>
+                <p>Online banking services will be unavailable from 10:00 PM to 2:00 AM for system upgrades.</p>
+                <div class="card-actions">
+                    <button class="learn-more-btn" onclick="showDetails('maintenance-sep15')">Learn More</button>
+                </div>
+            </div>
+
+            <div class="announcement-card" data-category="offers" data-date="2025-09-08">
+                <div class="card-header">
+                    <div class="card-icon">🎉</div>
+                    <div class="card-meta">
+                        <span class="category">Offers</span>
+                        <span class="date">Sep 08, 2025</span>
+                    </div>
+                </div>
+                <h3>Festival Season Special Offers</h3>
+                <p>Enjoy reduced interest rates on personal loans and special FD rates this festive season.</p>
+                <div class="card-actions">
+                    <button class="learn-more-btn" onclick="showDetails('festival-offers')">Learn More</button>
+                    <a href="#" class="download-link">📄 Download PDF</a>
+                </div>
+            </div>
+
+            <div class="announcement-card" data-category="policy" data-date="2025-09-02">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-meta">
+                        <span class="category">Policy</span>
+                        <span class="date">Sep 02, 2025</span>
+                    </div>
+                </div>
+                <h3>Updated Loan Policy Guidelines</h3>
+                <p>New eligibility criteria and documentation requirements for all loan categories effective immediately.</p>
+                <div class="card-actions">
+                    <button class="learn-more-btn" onclick="showDetails('loan-policy')">Learn More</button>
+                    <a href="#" class="download-link">📄 Download PDF</a>
+                </div>
+            </div>
+
+            <div class="announcement-card" data-category="security" data-date="2025-08-28">
+                <div class="card-header">
+                    <div class="card-icon">🔒</div>
+                    <div class="card-meta">
+                        <span class="category">Security</span>
+                        <span class="date">Aug 28, 2025</span>
+                    </div>
+                </div>
+                <h3>Mobile App Security Update</h3>
+                <p>Enhanced security features and biometric authentication now available in the latest app version.</p>
+                <div class="card-actions">
+                    <button class="learn-more-btn" onclick="showDetails('app-security')">Learn More</button>
+                </div>
+            </div>
+
+            <div class="announcement-card" data-category="maintenance" data-date="2025-08-20">
+                <div class="card-header">
+                    <div class="card-icon">✅</div>
+                    <div class="card-meta">
+                        <span class="category">Maintenance</span>
+                        <span class="date">Aug 20, 2025</span>
+                    </div>
+                </div>
+                <h3>System Upgrade Completed</h3>
+                <p>All banking services are now running on our upgraded infrastructure with improved performance.</p>
+                <div class="card-actions">
+                    <button class="learn-more-btn" onclick="showDetails('upgrade-complete')">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Support Section -->
+        <section class="support-section">
+            <div class="support-card">
+                <h3>Need Help?</h3>
+                <p>If you have any questions about these announcements, our support team is here to help.</p>
+                <button class="contact-btn">Contact Support</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for detailed announcements -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="announcement.js"></script>
+</body>
+</html>
