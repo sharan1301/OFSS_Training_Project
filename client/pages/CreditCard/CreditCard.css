@@ -1,0 +1,641 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+
+.nav {
+    height: 10vh;
+    width: 100%;
+    background-color: rgb(36, 101, 223);
+    margin-left: 0;
+}
+h1 {
+  margin-bottom: 30px;
+}
+
+
+.credit-card {
+  width: 280px;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+}
+
+.credit-card:hover {
+  transform: scale(1.05) rotateY(10deg);
+}
+
+.card-front {
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  border-radius: 15px;
+  color: white;
+  padding: 20px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.card-front.gold {
+  background: linear-gradient(135deg, #d4af37, #f7e27f);
+}
+
+.card-front.platinum {
+  background: linear-gradient(135deg, #434343, #000000);
+}
+
+.cardLogo {
+  width: 60px;
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+}
+
+.number {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.name, .expiry {
+  font-size: 14px;
+}
+
+.chip svg, .contactless svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+
+
+
+.btn {
+  padding: 8px 14px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn {
+  background: #28a745;
+  color: white;
+  margin-top: 15px;
+}
+
+.submit-btn:hover {
+  background: #1e7e34;
+}
+
+
+/* ====== Credit Card Application Form ====== */
+/* ====== Credit Card Application Form (Attractive Centered) ====== */
+
+#apply-form {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+#apply-form .form-container {
+ 
+  border-radius: 15px;
+  padding: 40px 50px;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Small inline button for OTP */
+.btn.small-btn {
+  background: #0077ff;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: 0.3s ease;
+}
+
+.btn.small-btn:hover {
+  background: #0056b3;
+}
+
+/* Wrap input + button in same row */
+.input-with-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-with-btn input {
+  flex: 1;
+}
+
+.btn.small-btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  background: #0077ff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.btn.small-btn:hover {
+  background: #0056b3;
+}
+
+#apply-form h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #333;
+  font-weight: bold;
+}
+
+#apply-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 30px;
+}
+
+#apply-form label {
+  display: block;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+#apply-form input,
+#apply-form select,
+#apply-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fdfdfd;
+  transition: all 0.3s ease;
+}
+
+#apply-form input:focus,
+#apply-form select:focus,
+#apply-form textarea:focus {
+  border-color: #0077ff;
+  box-shadow: 0 0 8px rgba(0, 119, 255, 0.3);
+  outline: none;
+}
+
+#apply-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Make Address & Submit button span full width */
+#apply-form textarea,
+#apply-form .submit-btn {
+  grid-column: span 2;
+}
+
+.btn.submit-btn {
+  background: linear-gradient(90deg, #0077ff, #0056b3);
+  color: #fff;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn.submit-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #004080);
+  transform: scale(1.03);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #apply-form form {
+    grid-template-columns: 1fr;
+  }
+
+  #apply-form textarea,
+  #apply-form .submit-btn {
+    grid-column: span 1;
+  }
+}
+
+.creditcards-section {
+    padding: 2rem 2vw;
+}
+.creditcards-section h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.creditcard-card {
+    max-width: 450px; /* fixed width */
+    width: 100%;
+    background: #fff;
+    border-radius: 22px;
+    padding: 0; /* REMOVE horizontal padding to avoid shrinking */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--background);
+    padding-top: 0;
+    margin-top: 0;
+    padding: 0rem 1.2rem 1.2rem 1.2rem;
+    flex: 1 1 0;
+    min-width: 260px;
+    max-width: 400px;
+    margin: 0 0.4vw 2rem 0.4vw;
+    display: flex;
+    flex-direction: column;
+}
+.card-img-container {
+    display: block;
+    justify-content: center;
+    align-items: flex-start;
+    width: 110%;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: -17px;
+}
+.card-container {
+    /* width: 100%;
+    max-width: none;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(50, 30, 10, 0.2);
+    overflow: hidden; */
+    width: 101%;
+    height: 100%;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(50, 30, 10, 0.2);
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.card-face.card-front {
+    width: 100%;
+    height: 100%;
+  background: linear-gradient(135deg, #9A6B33, #D4A76A);
+
+
+    position: relative;
+    /* border-radius: 18px; */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+}
+.card-face.card-front2 {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgb(41, 23, 237), #6942F5);
+
+    position: relative;
+    /* border-radius: 18px; */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+}
+.card-face.card-front3 {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000, #222120);
+
+
+    position: relative;
+    /* border-radius: 18px; */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+}
+.card-holder, .brand {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.holder-title, .expiry-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+}
+.brand-name {
+    size: 10px;
+    /* font-weight: bold;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2); */
+}
+    .card-content {
+    width: 100%;
+    padding: 16px; /* if you want some padding, keep equal padding left/right */
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+.card-icons span {
+    font-size: 1.25rem;
+    margin-left: 0.7rem;
+    color: var(--accent);
+    cursor: pointer;
+}
+.card-icons span:hover {
+    color: var(--primary);
+}
+.card-features {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #466A95;
+}
+.feature-more {
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+.card-details-btn {
+    background: transparent;
+    color: var(--accent);
+}
+.card-apply-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+.card-details-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.creditcards-row {
+    display: flex;
+    gap: 2vw;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+
+.creditcard-img {
+    border-radius: 14px;
+    width: 96%;
+    min-width: 220px;
+    max-width: 380px;
+}
+.card-offer-tag {
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    background: #FF5500;
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.18rem 1.1rem;
+    z-index: 1;
+}
+
+.card-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.1rem;
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+.card-icons span {
+    font-size: 1.23rem;
+    margin-left: 0.7rem;
+    color: var(--accent);
+    cursor: pointer;
+    transition: color 0.18s;
+}
+.card-icons span:hover {
+    color: #025;
+}
+.card-features {
+    color: #0259;
+    font-size: 1.07rem;
+    margin-bottom: 0.7rem;
+}
+.feature-more {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 0.99rem;
+    cursor: pointer;
+    margin-left: 0.21rem;
+}
+.card-actions {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 0.7rem;
+  
+}
+.card-apply-btn, .card-details-btn {
+    background: var(--background);
+    color: var(--primary);
+    border: 1px solid #0072ff;
+    font-weight: bold;
+    padding: 0.71rem 1.2rem;
+    border-radius: 7px;
+    border-color: #0072ff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.17s; 
+}
+.card-apply-btn:hover, .card-details-btn:hover {
+    color: var(--primary);
+    background-color: #0077ff;
+
+}
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(50, 30, 10, 0.2);
+    }
+    .card-front {
+      background: linear-gradient(135deg, #9A6B33, #D4A76A);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform-style: preserve-3d;
+    }
+    .card-front::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #acacac , #848482);
+      border-radius: 18px;
+      opacity: 0.8;
+    }
+    .card-front2::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #d3af37, #d3af37);
+      border-radius: 18px;
+      opacity: 0.8;
+    }
+    .card-front3::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #000000, #222120);
+      border-radius: 18px;
+      opacity: 0.8;
+    }
+    .brand {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .brand-name {
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+    .card-number {
+      font-size: 18px;
+      color: #fff;
+      letter-spacing: 3px;
+      margin: 10px 0;
+      position: relative;
+      z-index: 2;
+    }
+    .card-holder {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+    .holder-name, .expiry {
+      color: #fff;
+      font-size: 14px;
+    }
+    .holder-title, .expiry-title {
+      text-transform: uppercase;
+      font-size: 10px;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+     .chip {
+      width: 50px;
+      height: 40px;
+      background: linear-gradient(135deg, #D9C089, #E2CB9E);
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .chip::before, .chip::after {
+      content: '';
+      position: absolute;
+      background: #A17C3D;
+      opacity: 0.5;
+    }
+    .chip::before {
+      width: 80%;
+      height: 2px;
+      top: 25%;
+      left: 10%;
+    }
+     .shine {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 10%,
+        rgba(255, 255, 255, 0.2) 20%,
+        rgba(255, 255, 255, 0) 30%
+      );
+      transform: translateX(-100%);
+      animation: shine 5s infinite;
+      z-index: 3;
+      border-radius: 18px;
+    }
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%);
+      }
+      20%, 100% {
+        transform: translateX(100%);
+      }
+    }

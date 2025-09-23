@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Bank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="landingPage.css">
+    <link rel="stylesheet" href="../components/navbar.css" />
+</head>
+<body>
+   <div id="navbar-placeholder"></div>
+   
+  <!-- rest of your page content -->
+  <script src="../components/navbar.js"></script>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="16247556_9729.svg" alt="Hero Image" class="hero-img">
+        <div class="hero-content">
+            <h1>Welcome to Secure Bank</h1>
+            <p>Your trusted partner for savings, salary, current accounts, and flexible loans.</p>
+        </div>
+    </section>
+
+    <!-- Accounts Section -->
+    <section class="accounts-section">
+        <h2>Accounts</h2>
+        <div class="account-types">
+            <div class="account-card">
+                <h3>Savings Account</h3>
+                <p>Earn interest and save securely.</p>
+                <a href="../accountRequestPage/accountRequest.html">
+                    <button class="apply-btn">Apply</button>
+                </a>
+            </div>
+            <div class="account-card">
+                <h3>Salary Account</h3>
+                <p>Seamless salary credit, exclusive rewards.</p>
+                <a href="../accountRequestPage/accountRequest.html">
+                    <button class="apply-btn">Apply</button>
+                </a>
+            </div>
+            <div class="account-card">
+                <h3>Current Account</h3>
+                <p>Manage business transactions effortlessly.</p>
+                <a href="../accountRequestPage/accountRequest.html">
+                    <button class="apply-btn">Apply</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loans Section -->
+    <section class="loans-section">
+        <h2>Loans</h2>
+        <div class="loans-container">
+            <!-- Loan Options (carousel style) -->
+            <div class="loan-left-card">
+                <h3>Choose Your Loan</h3>
+                <div class="loan-types-switch">
+                    <button class="loan-type-btn active" data-type="Personal">Personal</button>
+                    <button class="loan-type-btn" data-type="Home">Home</button>
+                    <button class="loan-type-btn" data-type="Vehicle">Vehicle</button>
+                    <button class="loan-type-btn" data-type="Education">Education</button>
+                </div>
+                <div class="loan-caption">
+                    <span id="loan-caption">Instant approval, minimal documentation, flexible usage.</span>
+                </div>
+                <!-- Amount Slider and Inputs -->
+                <div class="form-row">
+                    <label class="form-label">Amount</label>
+                    <div class="slider-wrapper">
+                        <input type="range" min="50000" max="500000" step="10000" value="50000" id="amountSlider" />
+                        <input type="number" id="amountInput" value="50000" class="amount-input" />
+                    </div>
+                    <div class="slider-labels">
+                        <span>50K</span>
+                        <span>10L</span>
+                        <span>20L</span>
+                        <span>30L</span>
+                        <span>40L</span>
+                        <span>50L</span>
+                    </div>
+                    <span class="amount-words" id="amountWords">Fifty Thousand</span>
+                </div>
+                <!-- Duration Switch -->
+                <div class="form-row">
+                    <label class="form-label">Duration</label>
+                    <div class="duration-switch">
+                        <button class="duration-btn active" data-months="6">6 Months</button>
+                        <button class="duration-btn" data-months="12">1 Year</button>
+                        <button class="duration-btn" data-months="24">2 Year</button>
+                        <button class="duration-btn" data-months="custom">Custom</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loan Calculator Card -->
+            <div class="loan-calculator-card">
+                <div class="interest-header">
+                    <span>Interest Rate @ <span id="interestRateDisplay">11</span> %</span>
+                    <span class="edit-rate">&#9998;</span>
+                </div>
+                <div class="loan-main-info">
+                    <div class="loan-amount-display">&#8377;<span id="emiAmount">8603</span></div>
+                    <div class="loan-total-interest">
+                        Total Interest: &#8377;<span id="totalInterest">1616</span>
+                    </div>
+                    <small class="loan-disclaimer">Disclaimer and Terms & Conditions Applied</small>
+                    <div class="loan-benefits">
+                        <div>Minimal documentation</div>
+                        <div>No Collateral required</div>
+                    </div>
+                </div>
+                <div class="loan-calculator-actions">
+                    <button class="details-btn">DETAILS</button>
+                    <button class="apply-now-btn">APPLY NOW</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credit Cards Section -->
+<section class="creditcards-section">
+    <h2>Credit Cards</h2>
+    <div class="creditcards-row">
+        <!-- Sapphire Card -->
+        <div class="creditcard-card">
+            <div class="card-img-container">
+                <div class="card-img-container">
+                <div class="card-container">
+        <div class="card-face card-front">
+            <div class="shine"></div>
+            <div class="chip"></div>
+            <div class="card-number">6281 9374 2156 8942</div>
+            <div class="card-holder">
+                <div>
+                    <div class="holder-title">Card Holder</div>
+                    <div class="holder-name">JONATHAN EDWARDS</div>
+                </div>
+                <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">09/26</div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="brand-name">ÉCLAT</div>
+            </div>
+        </div>
+        </div>
+    </div>
+                <!-- <img src="https://via.placeholder.com/320x180/025/fff?text=Sapphiro+Card" alt="Sapphiro Card" class="creditcard-img"> -->
+            </div>
+            <div class="card-content">
+                <div class="card-title-row">
+                    <span class="card-title">Sapphiro ↗</span>
+                    <span class="card-icons">
+                        <span title="Add to Wishlist">&#9825;</span>
+                        <span title="Compare">&#8644;</span>
+                    </span>
+                </div>
+            
+                <div class="card-features">
+                    Lounge Access | Golf Rounds | BookMyShow Offers <span class="feature-more">more</span>
+                </div>
+                <div class="card-actions">
+                    <button class="card-apply-btn">APPLY</button>
+                    <button class="card-details-btn">DETAILS</button>
+                </div>
+            </div>
+        </div>
+        <!-- Rubyx Card -->
+        <div class="creditcard-card">
+            <div class="card-img-container">
+                 <div class="card-img-container">
+                <div class="card-container">
+        <div class="card-face card-front2">
+            <div class="shine"></div>
+            <div class="chip"></div>
+            <div class="card-number">6281 9374 2156 8942</div>
+            <div class="card-holder">
+                <div>
+                    <div class="holder-title">Card Holder</div>
+                    <div class="holder-name">JONATHAN EDWARDS</div>
+                </div>
+                <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">09/26</div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="brand-name">ÉCLAT</div>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- <img src="https://via.placeholder.com/320x180/049/fff?text=Rubyx+Card" alt="Rubyx Card" class="creditcard-img"> -->
+            </div>
+            <div class="card-content">
+                
+                <div class="card-title-row">
+                    <span class="card-title">Rubyx ↗</span>
+                    <span class="card-icons">
+                        <span title="Add to Wishlist">&#9825;</span>
+                        <span title="Compare">&#8644;</span>
+                    </span>
+                </div>
+                
+                <div class="card-features">
+                    Welcome vouchers | Complimentary Golf rounds | Lounge access <span class="feature-more">more</span>
+                </div>
+                <div class="card-actions">
+                    <button class="card-apply-btn">APPLY</button>
+                    <button class="card-details-btn">DETAILS</button>
+                </div>
+            </div>
+        </div>
+        <!-- Coral Card -->
+        <div class="creditcard-card">
+            
+            <div class="card-img-container">
+               <div class="card-img-container">
+    <!-- <div class="card-offer-tag hot">Hot Selling</div> -->
+    <div class="card-container">
+        <div class="card-face card-front3">
+            <div class="shine"></div>
+            <div class="chip"></div>
+            <div class="card-number">6281 9374 2156 8942</div>
+            <div class="card-holder">
+                <div>
+                    <div class="holder-title">Card Holder</div>
+                    <div class="holder-name">JONATHAN EDWARDS</div>
+                </div>
+                <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">09/26</div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="brand-name">ÉCLAT</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <!-- <img src="https://via.placeholder.com/320x180/9cc/fff?text=Coral+Card" alt="Coral Card" class="creditcard-img"> -->
+            </div>
+            <div class="card-content">
+                <div class="card-title-row">
+                    <span class="card-title">Coral ↗</span>
+                    <span class="card-icons">
+                        <span title="Add to Wishlist">&#9825;</span>
+                        <span title="Compare">&#8644;</span>
+                    </span>
+                </div>
+                <div class="card-features">
+                    Lounge access | BookMyShow offers | INOX offers <span class="feature-more">more</span>
+                </div>
+                <div class="card-actions">
+                    <button class="card-apply-btn">APPLY</button>
+                    <button class="card-details-btn">DETAILS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Investments Section -->
+<section class="investments-section">
+    <h2 class="investments-heading">Discover an investment perfect for you.</h2>
+    
+    <div class="investment-cards-row">
+        <!-- 3-in-1 Account Card -->
+        <div class="investment-card">
+            <div class="inv-card-title-row">
+                <span class="inv-card-title">3-in-1 Account</span>
+                <span class="inv-card-arrow">&#8599;</span>
+            </div>
+            <div class="inv-card-desc">
+                Invest, Grow and Save your funds
+            </div>
+            <div class="inv-card-actions">
+                <button class="inv-btn">INVEST</button>
+                <button class="inv-btn details">DETAILS</button>
+            </div>
+        </div>
+        <!-- IPO Card -->
+        <div class="investment-card">
+            <div class="inv-card-title-row">
+                <span class="inv-card-title">IPO</span>
+                <span class="inv-card-arrow">&#8599;</span>
+            </div>
+            <div class="inv-card-desc">
+                For Seamless IPO Investments
+            </div>
+            <div class="inv-card-actions">
+                <button class="inv-btn">INVEST</button>
+                <button class="inv-btn details">DETAILS</button>
+            </div>
+        </div>
+        <!-- Mutual Funds Card -->
+        <div class="investment-card">
+            <div class="inv-card-title-row">
+                <span class="inv-card-title">Mutual Funds</span>
+                <span class="inv-card-arrow">&#8599;</span>
+            </div>
+            <div class="inv-card-desc">
+                Market-linked investment with diversified portfolio and growth potential
+            </div>
+            <div class="inv-card-actions">
+                <button class="inv-btn">INVEST</button>
+                <button class="inv-btn details">DETAILS</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>FAQs</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h4>How to apply for an account?</h4>
+                <p>Fill the online form or visit our branch to open your account easily.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What documentation is required?</h4>
+                <p>Basic identification and address proof are needed for accounts and loans.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Is online banking secure?</h4>
+                <p>Yes, our platform uses advanced security protocols for your protection.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="landingPage.js"></script>
+</body>
+</html>

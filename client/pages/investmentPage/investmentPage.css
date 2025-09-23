@@ -1,0 +1,278 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fefefe;
+  color: #025;
+}
+
+h1, h2 {
+  margin-bottom: 0.6rem;
+  color: #025;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #024a86, #0471b8);
+  color: #fff;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.hero-cta {
+  background-color: #049;
+  color: white;
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.hero-cta:hover {
+  background-color: #025;
+}
+
+/* Investment Types Section */
+.investment-types-section {
+  padding: 3rem 2rem 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.investment-types-container {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.investment-types-list {
+  flex: 0 0 210px; /* narrower left card */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgb(2 52 112 / 0.15);
+  padding: 2rem 1.5rem;
+}
+
+.investment-types-list h2,
+.investment-benefits-display h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #049;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.investment-types-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.investment-types-list li {
+  font-size: 1.1rem;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  user-select: none;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+
+.investment-types-list li.active,
+.investment-types-list li:hover {
+  background-color: #049;
+  border-color: #025;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Benefits display card */
+.investment-benefits-display {
+  flex: 1 1 0;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  background: #025;
+  box-shadow: 0 5px 14px rgb(2 52 112 / 0.25);
+  color: #fff;
+  min-width: 340px;
+  min-height: 280px;
+}
+
+.investments-heading{
+    color: #fff;
+}
+/* Benefits content formatting */
+#benefitsContent {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.benefit-item {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(2, 52, 112, 0.15);
+  user-select: none;
+}
+
+.benefit-item:last-child {
+  border-bottom: none;
+}
+
+.benefit-title {
+  font-weight: 700;
+  font-size: 1.18rem;
+  margin-bottom: 0.35rem;
+  color: #fff;
+}
+
+.benefit-caption {
+  font-weight: 400;
+  font-size: 1rem;
+  opacity: 0.85;
+  max-width: 520px;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .investment-types-container {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+  .investment-types-list,
+  .investment-benefits-display {
+    min-width: 100%;
+    flex-grow: 1;
+  }
+}
+
+
+.discover-investment-section {
+    background: #fff;
+    border-radius: 30px;
+    margin: 2.5rem auto;
+    padding: 2.2rem 2.5rem 2.5rem 2.5rem;
+    box-shadow: 0 4px 28px #024a8612;
+    max-width: 1200px;
+}
+
+.discover-investment-section h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.3rem;
+    color: #025;
+}
+
+.discover-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+}
+.discover-tab {
+    background: #f4f7fa;
+    color: #025;
+    font-weight: 600;
+    border: none;
+    font-size: 1.07rem;
+    border-radius: 10px;
+    padding: 0.7rem 1.6rem;
+    cursor: pointer;
+    transition: background 0.16s, color 0.16s;
+}
+.discover-tab.active, .discover-tab:hover {
+    background: #049;
+    color: #fff;
+}
+
+.discover-cards-row {
+    display: flex;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.discover-card {
+    flex: 1 1 270px;
+    min-width: 240px;
+    max-width: 340px;
+    background: #f7fafd;
+    border-radius: 22px;
+    box-shadow: 0 6px 24px #0251;
+    padding: 2.2rem 1.4rem 1.2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: box-shadow 0.18s, transform 0.18s;
+}
+.discover-card:hover {
+    box-shadow: 0 16px 32px #0252;
+    transform: translateY(-5px) scale(1.018);
+}
+.discover-card .arrow {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.3rem;
+    color: #ff8000;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.discover-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0d3866;
+    margin-bottom: 0.6rem;
+}
+.discover-card-desc {
+    color: #456190;
+    font-size: 1.02rem;
+    margin-bottom: 1.25rem;
+}
+
+.discover-card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 2.1rem;
+}
+.discover-card-actions button {
+    background: none;
+    border: none;
+    color: #049;
+    font-weight: 700;
+    font-size: 1.06rem;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: color 0.15s;
+}
+.discover-card-actions button:hover {
+    color: #025;
+}
+
+@media (max-width:1000px) {
+    .discover-cards-row {
+        gap: 1rem;
+    }
+}
+@media (max-width:650px) {
+    .discover-cards-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .discover-card {
+        max-width: 98vw;
+    }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #002255;
+      font-family: Arial, sans-serif;
+    }
+
+    .center-div {
+      display: flex;
+      width: 900px;
+      height: 470px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      background-color: white;
+    }
+
+    .left-side {
+      flex: 1.8;
+    }
+
+    .left-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .right-side {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #fff;
+    }
+
+    .right-side p {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .right-side button {
+      padding: 12px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #025;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .right-side button:hover {
+      background-color: #01345a;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+    }
+
+    .logo img {
+        width: 250px; 
+        height: auto; 
+        }
+  </style>
+</head>
+<body>
+  <div class="center-div">
+    <div class="left-side">
+      <img src="../../icons/bank.jpg" alt="Login Image">
+    </div>
+    <div class="right-side">
+        <div class="logo"><img src="../../icons/image.png" alt="Logo"></div>
+        <div class="content"><p>Please choose an option below to continue</p></div>
+        <button onclick="window.location.href='../customerLoginPage/custLogin.html'">Customer Login</button>
+        <button onclick="window.location.href='../adminLoginPage/adminLogin.html'">Admin Login</button>
+    </div>
+  </div>
+</body>
+</html>
+  

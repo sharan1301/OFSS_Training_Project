@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account Request - Secure Bank</title>
+    <link rel="stylesheet" href="accountRequest.css" />
+</head>
+<body>
+    <main class="form-container">
+        <h1>Account opening at your Doorstep</h1>
+        <form id="accountRequestForm" novalidate>
+
+            <!-- Row 1: First Name, Last Name, Account Type -->
+            <div class="row">
+    <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" name="firstName" maxlength="100" />
+        <div class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" name="lastName" maxlength="100" />
+        <div class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="accountType">Account Type *</label>
+        <select id="accountType" name="accountType">
+            <option value="" disabled selected>Select account type</option>
+            <option value="Savings">Savings Account</option>
+            <option value="Salary">Salary Account</option>
+            <option value="Current">Current Account</option>
+        </select>
+        <div class="error-message"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" maxlength="15" placeholder="+91xxxxxxxxxx" />
+        <div class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" maxlength="150" placeholder="example@mail.com" />
+        <div class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="panNumber">PAN Number *</label>
+        <input type="text" id="panNumber" name="panNumber" maxlength="10" placeholder="ABCDE1234F" />
+        <div class="error-message"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+        <label for="aadhaarNumber">AADHAAR Number *</label>
+        <input type="text" id="aadhaarNumber" name="aadhaarNumber" maxlength="12" />
+        <div class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="occupation">Occupation</label>
+        <input type="text" id="occupation" name="occupation" maxlength="100" placeholder="Optional" />
+        <div class="error-message"></div>
+    </div>
+    <div class="form-group">
+        <label for="annualIncome">Annual Income (₹)</label>
+        <input type="number" id="annualIncome" name="annualIncome" min="0" step="0.01" placeholder="Optional" />
+        <div class="error-message"></div>
+    </div>
+</div>
+
+<div class="form-group checkbox-group">
+    <label>
+        <input type="checkbox" id="consent" name="consent" required />
+        I authorise SecureBank and its representatives to contact me through phone, email, SMS and WhatsApp.
+        <br>
+        <input type="checkbox" id="terms" name="terms" required />
+        I also agree to SecureBank's <a href="SecureBank_Terms_and_Conditions.pdf" target="_blank">Terms and Conditions</a>
+    </label>
+</div>
+
+<button type="submit" class="submit-btn">Submit Request</button>
+
+        </form>
+    </main>
+    <script src="js/accountRequest.js"></script>
+</body>
+</html>

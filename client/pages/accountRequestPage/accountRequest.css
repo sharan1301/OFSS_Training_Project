@@ -1,0 +1,127 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #025;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+main.form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-top:30px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 900px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.error-message {
+    color: #d93025;
+    font-size: 0.875rem;
+    margin-top: 2px;
+    min-height: 18px;
+}
+
+.input-error {
+    border-color: #d93025 !important;
+    outline: none;
+    box-shadow: 0 0 0 1px #d93025 inset;
+}
+
+main.form-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #003366;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 15px;
+}
+
+.row .form-group {
+    flex: 1 1 30%; /* 3 fields per row */
+    min-width: 200px;
+}
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.form-group select, .form-group input {
+    width: 95%;
+    padding: 12px 10px;
+    border-radius: 6px;
+    border: 1px solid black;
+    font-size: 16px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #025;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #003366;
+}
+
+@media (max-width: 800px) {
+    main.form-container {
+        width: 95%;
+        padding: 30px 20px;
+    }
+    .row {
+        flex-direction: column;
+    }
+    .submit-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+}

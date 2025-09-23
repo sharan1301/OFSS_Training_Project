@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Investment Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="investmentPage.css" />
+    <link rel="stylesheet" href="../components/navbar.css" />
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+  <!-- rest of your page content -->
+  <script src="../components/navbar.js"></script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Invest with Confidence & Grow Your Wealth</h1>
+            <p>Explore a range of investment options that suit your financial goals.</p>
+            <button class="hero-cta">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Investment Types Section -->
+    <section class="investment-types-section">
+        <div class="investment-types-container">
+            <!-- Left: list of investment types -->
+            <div class="investment-types-list">
+                <h2>Investment Types</h2>
+                <ul>
+                    <li data-id="mutualFunds" class="active">Mutual Funds</li>
+                    <li data-id="stocksIPO">Stocks / IPO</li>
+                    <li data-id="bonds">Bonds</li>
+                    <li data-id="demat">Demat</li>
+                    <li data-id="govSchemes">Government Schemes</li>
+                    <li data-id="nps">NPS</li>
+                </ul>
+            </div>
+            <!-- Right: benefits display -->
+            <div class="investment-benefits-display">
+                <h2 class="investments-heading">Benefits</h2>
+                <div id="benefitsContent">
+                    <!-- Benefits will load here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Discover Investment Section -->
+<section class="discover-investment-section">
+    <h2>Discover an investment perfect for you.</h2>
+    <div class="discover-tabs" id="discoverTabs">
+        <button class="discover-tab active" data-tab="start">Start Investing</button>
+        <button class="discover-tab" data-tab="tax">Tax Planning</button>
+        <button class="discover-tab" data-tab="retirement">Retirement Plans</button>
+        <button class="discover-tab" data-tab="short">Short-Term Investments</button>
+        <button class="discover-tab" data-tab="long">Long-Term Investments</button>
+    </div>
+    <div class="discover-cards-row" id="discoverCardsRow">
+        <!-- Cards will be injected here -->
+    </div>
+</section>
+
+
+    <script src="investmentPage.js"></script>
+</body>
+</html>

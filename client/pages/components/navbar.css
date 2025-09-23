@@ -1,0 +1,47 @@
+:root {
+    --primary: #025;
+    --accent: #049;
+    --background: #fff;
+}
+.navbar {
+    background: var(--primary);
+    color: var(--background);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+.bank-name {
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-right: 2rem;
+}
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.2rem;
+    margin: 0;
+    padding: 0;
+}
+.navbar-menu li a {
+    color: var(--background);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+.navbar-menu li a:hover {
+    color: var(--accent);
+}
+.login-btn {
+    background: var(--accent);
+    color: var(--background);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
