@@ -84,11 +84,18 @@ document.getElementById("password-form").addEventListener("submit", function (e)
     body: JSON.stringify({ custId, password })
   })
     .then(async res => {
-      const msg = await res.text();
       if (res.ok) {
-        setTimeout(() => window.location.href = "../dashBoardPage/accounts.html", 2000);
+        const data = await res.json(); // 👈 expect JWT in response
+        if (data.token) {
+          localStorage.setItem("jwtToken", data.token); // 🔑 save token
+          alert("Login successful!");
+          setTimeout(() => window.location.href = "../dashBoardPage/accounts.html", 1000);
+        } else {
+          alert("Login failed: No token received.");
+        }
       } else {
-        alert("Invalid Customer ID or Password");
+        const msg = await res.text();
+        alert("Invalid Customer ID or Password. " + msg);
       }
     })
     .catch(() => alert("Server error"));

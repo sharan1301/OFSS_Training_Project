@@ -1,5 +1,5 @@
 // ✅ Captcha generator
-function generateCaptcha() {
+ function generateCaptcha() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let captcha = "";
   for (let i = 0; i < 6; i++) {
@@ -70,7 +70,7 @@ function launchConfetti() {
 }
 
 // ✅ Password form submission
-document.getElementById("password-form").addEventListener("submit", function (e) {
+document.getElementById("password-form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   if (!validatePassword()) return;
@@ -78,11 +78,30 @@ document.getElementById("password-form").addEventListener("submit", function (e)
   const enteredCaptcha = document.getElementById("captcha-input").value;
   const actualCaptcha = document.getElementById("captcha-text").innerText;
 
-  if (enteredCaptcha === actualCaptcha) {
-    showToast("✅ Successful Login", "success");
-    setTimeout(() => window.location.href = "admin.html", 2000);
-  } else {
-    showToast("❌ Captcha does not match. Try again.", "error");
-    generateCaptcha();
+  // 👇 Collect login details (assuming you also have username field)
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // ✅ Save JWT to localStorage
+      localStorage.setItem("jwtToken", data.token);
+
+      showToast("✅ Successful Login", "success");
+      setTimeout(() => window.location.href = "admin.html", 2000);
+    } else {
+      const errorMsg = await response.text();
+      showToast("❌ " + errorMsg, "error");
+    }
+  } catch (err) {
+    console.error(err);
+    showToast("❌ Failed to connect to server", "error");
   }
 });

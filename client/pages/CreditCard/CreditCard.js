@@ -118,6 +118,7 @@ async function submitApplication(event) {
     paymentMethod: document.getElementById("paymentMethod").value
   };
   
+  const token = localStorage.getItem("jwtToken");
 
   const username = "user"; // or "admin"
   const password = "1234"; 
@@ -125,7 +126,8 @@ async function submitApplication(event) {
     const res = await fetch("http://localhost:8080/credit-card/apply", {
       method: "POST",
       headers: { "Content-Type": "application/json",
-                "Authorization": "Basic " + btoa(username + ":" + password)
+                // "Authorization": "Basic " + btoa(username + ":" + password),
+                 "Authorization": token ? `Bearer ${token}` : "" 
        },
       body: JSON.stringify(data),
     });
@@ -157,12 +159,15 @@ function checkStatus() {
 
     const username = "user"; // or "admin"
     const password = "1234";
+    
+    const token = localStorage.getItem("jwtToken"); 
 
     fetch(`http://localhost:8080/credit-card/status/${aadhaar}`, {
         method: "GET",
         headers: {
-            "Authorization": "Basic " + btoa(username + ":" + password),
-            "Content-Type": "application/json"
+            // "Authorization": "Basic " + btoa(username + ":" + password),
+            "Content-Type": "application/json",
+             "Authorization": token ? `Bearer ${token}` : "" 
         }
     })
     .then(response => {

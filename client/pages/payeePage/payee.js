@@ -3,7 +3,16 @@ const accountId = 3;
 
 // Fetch all payees for this account
 async function fetchPayees() {
-    const response = await fetch(`${apiBaseUrl}/account/${accountId}`);
+
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch(`${apiBaseUrl}/account/${accountId}`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+});
     if (!response.ok) {
         console.error("Failed to fetch payees");
         return [];
@@ -13,9 +22,12 @@ async function fetchPayees() {
 }
 
 async function addPayeeApi(data) {
+     const token = localStorage.getItem("jwtToken");
     const response = await fetch(`${apiBaseUrl}/${accountId}/add`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+         },
         body: JSON.stringify({
             payeeName: data.beneficiaryName,
             payeeAccNo: data.beneficiaryAccountNum,
@@ -293,9 +305,12 @@ function showPayeeDetails(payee) {
 
 
 async function updatePayeeApi(data) {
+    const token = localStorage.getItem("jwtToken");
     const response = await fetch(`${apiBaseUrl}/update/${data.payeeId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+         },
         body: JSON.stringify(data)
     });
 
@@ -309,8 +324,14 @@ async function updatePayeeApi(data) {
 
 
 async function deletePayeeApi(payeeId) {
+    const token = localStorage.getItem("jwtToken");
     const response = await fetch(`${apiBaseUrl}/${payeeId}`, {
-        method: "DELETE"
+        method: "DELETE",
+         headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
     });
 
     if (response.status === 204) { // No Content, success delete
