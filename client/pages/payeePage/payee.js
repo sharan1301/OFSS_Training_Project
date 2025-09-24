@@ -1,22 +1,54 @@
 const apiBaseUrl = "http://localhost:8080/payees"; 
-const accountId = 22;
 
 const token =localStorage.getItem("jwtToken");
 if(!token){
     window.location.href="../loginPage/login.html"
 }
 
+async function fetchAccountByCustId() {
+    const custId = localStorage.getItem("custId");
+
+  if (!custId) {
+    alert("User not logged in.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:8080/accounts/by-custid/${custId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
+      }
+    });
+
+    if (!res.ok) throw new Error('Failed to fetch account');
+
+    const accountData = await res.json();
+    return accountData;
+  } catch (err) {
+    console.error(err);
+    alert("Error fetching account details.");
+  }
+}
+    document.addEventListener('DOMContentLoaded', fetchAccountByCustId);
+
 // Fetch all payees for this account
 async function fetchPayees() {
 
+    accountData = await fetchAccountByCustId(); 
+    
+
+
+
     const token = localStorage.getItem("jwtToken");
-    const response = await fetch(`${apiBaseUrl}/account/${accountId}`, {
-    method: "POST",
+    const response = await fetch(`${apiBaseUrl}/account/${accountData.accountId}`, {
+    method: "GET",
     headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
     },
-    body: JSON.stringify(data)
+    // body: JSON.stringify(data)
+    
 });
     if (!response.ok) {
         console.error("Failed to fetch payees");
@@ -28,8 +60,9 @@ async function fetchPayees() {
 
 async function addPayeeApi(data) {
      const token = localStorage.getItem("jwtToken");
+     accountData = await fetchAccountByCustId(); 
 
-    const response = await fetch(`${apiBaseUrl}/${accountId}/add`, {
+    const response = await fetch(`${apiBaseUrl}/${accountData.accountId}/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -127,81 +160,6 @@ async function renderPayeeList(selectedId = null) {
 }
 
 
-
-// function showPayeeDetails(payee) {
-//     const section = document.getElementById('payeeDetailSection');
-//     const detailDiv = document.getElementById('payeeDetail');
-//     detailDiv.innerHTML = `
-//         <form class="payee-detail-form">
-//             <div class="payee-row">
-//                 <label for="updatePayeeName">Name:</label>
-//                 <input type="text" id="updatePayeeName" value="${payee.payeeName}" />
-//             </div>
-//             <div class="payee-row">
-//                 <label for="updatePayeeAccNo">Account Number:</label>
-//                 <input type="text" id="updatePayeeAccNo" value="${payee.payeeAccNo}" readonly />
-//             </div>
-//             <div class="payee-row">
-//                 <label for="updatePayeeIFSC">IFSC: </label>
-//                 <input type="text" id="updatePayeeIFSC" value="${payee.ifscCode}" maxlength="11" />
-//             </div>
-//             <div class="payee-detail-actions">
-//                 <button type="button" id="updatePayeeBtn" class="update-btn">Update Payee</button>
-//                 <button type="button" id="deletePayeeBtn" class="delete-btn">Delete Payee</button>
-//             </div>
-//             <div id="updateMessage" class="message"></div>
-//         </form>
-//     `;
-//     section.style.display = 'block';
-
-//     // Confirmation dialogs and event handlers
-//     document.getElementById('updatePayeeBtn').onclick = async () => {
-//         if (!confirm("Are you sure you want to update this payee?")) return;
-//         const updatedName = document.getElementById('updatePayeeName').value.trim();
-//         const updatedIFSC = document.getElementById('updatePayeeIFSC').value.trim();
-
-//         if (!updatedName) {
-//             alert("Name cannot be empty.");
-//             return;
-//         }
-//         if (!/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/.test(updatedIFSC)) {
-//             alert("Enter a valid 11-character IFSC Code.");
-//             return;
-//         }
-
-//         const updatedData = {
-//             payeeId: payee.payeeId,
-//             payeeName: updatedName,
-//             payeeAccNo: payee.payeeAccNo,
-//             ifscCode: updatedIFSC
-//         };
-
-//         const updateSuccess = await updatePayeeApi(updatedData);
-//         if (updateSuccess) {
-//             document.getElementById('updateMessage').textContent = "Payee updated successfully.";
-//             renderPayeeList(payee.payeeId);
-//         } else {
-//             document.getElementById('updateMessage').textContent = "Failed to update payee.";
-//         }
-//     };
-
-//     document.getElementById('deletePayeeBtn').onclick = async () => {
-//         if (!confirm(`Are you sure you want to delete payee "${payee.payeeName}"?`)) return;
-//         if (!confirm(`Are you sure you want to delete payee "${payee.payeeName}"?`)) {
-//             return;
-//         }
-//         const deleteSuccess = await deletePayeeApi(payee.payeeId);
-//         if (deleteSuccess) {
-//             document.getElementById('updateMessage').textContent = "Payee deleted successfully.";
-//             document.getElementById('payeeDetailSection').style.display = 'none';
-//             renderPayeeList();
-//         } else {
-//             document.getElementById('updateMessage').textContent = "Failed to delete payee.";
-//         }
-//     };
-// }
-
-
 function showPayeeDetails(payee) {
     const section = document.getElementById('payeeDetailSection');
     const detailDiv = document.getElementById('payeeDetail');
@@ -292,6 +250,7 @@ function showPayeeDetails(payee) {
     document.getElementById('deletePayeeBtn').onclick = () => {
         showConfirmation(`Are you sure you want to delete payee "${payee.payeeName}"?`, async () => {
             const success = await deletePayeeApi(payee.payeeId);
+            console.log(payee.payeeId);
             if (success) {
                 document.getElementById('updateMessage').textContent = "Payee deleted successfully.";
                 section.style.display = 'none';
@@ -325,16 +284,15 @@ async function updatePayeeApi(data) {
 
 async function deletePayeeApi(payeeId) {
     const token = localStorage.getItem("jwtToken");
-    const response = await fetch(`${apiBaseUrl}/${payeeId}`, {
+    const response = await fetch(`${apiBaseUrl}/delete/${payeeId}`, {
         method: "DELETE",
          headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
-    },
-    body: JSON.stringify(data)
+    }
     });
 
-    if (response.status === 204) { // No Content, success delete
+    if (response.status === 200) { 
         return true;
     } else {
         console.error("Failed to delete payee:", response.status, response.statusText);

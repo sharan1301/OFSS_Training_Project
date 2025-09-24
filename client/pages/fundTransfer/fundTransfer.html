@@ -145,12 +145,7 @@ let payeesList = [];
     accountData = await fetchAccountByCustId(); // Fetch account data first if not available
   }
 
-  if (!accountData) return; // If accountData is still null, stop further execution
-
-  // document.getElementById('accountNumber').textContent = accountData.accountNumber;
-  // document.getElementById('accountBalance').textContent = `💰 Balance: ₹${accountData.balance.toLocaleString()}`;
-  // document.getElementById('accountType').textContent = accountData.accountType;
-  // document.getElementById('customerId').textContent = custId;
+  if (!accountData) return; 
 }
     function getTransferDetails(method) {
       if (method === 'self') {
