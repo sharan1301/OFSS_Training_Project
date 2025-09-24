@@ -1,5 +1,10 @@
 const apiBaseUrl = "http://localhost:8080/payees"; 
-const accountId = 3;
+const accountId = 22;
+
+const token =localStorage.getItem("jwtToken");
+if(!token){
+    window.location.href="../loginPage/login.html"
+}
 
 // Fetch all payees for this account
 async function fetchPayees() {
@@ -23,6 +28,7 @@ async function fetchPayees() {
 
 async function addPayeeApi(data) {
      const token = localStorage.getItem("jwtToken");
+
     const response = await fetch(`${apiBaseUrl}/${accountId}/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json",
@@ -41,12 +47,6 @@ async function addPayeeApi(data) {
     return await response.json();
 }
 
-
-
-// async function deletePayee(payeeId) {
-//     await fetch(`${apiBaseUrl}/${payeeId}`, { method: "DELETE" });
-//     loadPayees();
-// }
 
 
 // Dummy payee data

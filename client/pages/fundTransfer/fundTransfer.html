@@ -49,137 +49,200 @@
       </div>
     </div>
 
-    <!-- Dynamic Form Container -->
     <div id="dynamicFormContainer"></div>
   </div>
 
   <script>
-    const accountId = 3; // Current user ID (change as needed)
-    let defaultFromAccount = '';
-    let payeesList = [];
+    let accountData = null;
+const token = localStorage.getItem("jwtToken");
 
-    // Fetch account details from backend
+if (!token) {
+  window.location.href = "../loginPage/login.html";
+}
+
+let defaultFromAccount = '';
+let payeesList = [];
+    
+
     async function fetchAccountDetails(accountId) {
-      try {
-        const res = await fetch(`http://localhost:8080/accounts/${accountId}`);
-        if (!res.ok) throw new Error('Failed to fetch account');
-        return await res.json();
-      } catch (err) {
-        console.error(err);
-        return { accountNumber: '', balance: 0, accountType: 'Current', customerId: accountId };
-      }
-    }
+  if (!accountData) {
+    await fetchAccountByCustId();  // Ensure account data is fetched first
+  }
 
+  try {
+    const res = await fetch(`http://localhost:8080/accounts/${accountId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
+      }
+    });
+
+    if (!res.ok) throw new Error('Failed to fetch account');
+    console.log(res.json)
+    accountData = await res.json();
+    return accountData;
+  } catch (err) {
+    console.error(err);
+    alert("Error fetching account details.");
+    return null;
+  }
+}
     async function fetchPayees() {
-      try {
-        const res = await fetch(`http://localhost:8080/payees/account/${accountId}`);
-        if (!res.ok) return [];
-        return await res.json();
-      } catch {
-        return [];
+  if (!accountData) {
+    await fetchAccountByCustId();  // Ensure account data is fetched first
+  }
+
+  try {
+    const res = await fetch(`http://localhost:8080/payees/account/${accountData.accountId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
       }
-    }
+    });
+    if (!res.ok) return [];
+    console.log(res.json);
+    return await res.json();
+  } catch {
+    return [];
+  }
+}
+    async function fetchAccountByCustId() {
+    const custId = localStorage.getItem("custId");
 
-    // Update Account Card UI
-    async function updateAccountCard() {
-      const data = await fetchAccountDetails(accountId);
-      defaultFromAccount = data.accountNumber;
-      document.getElementById('accountNumber').textContent = data.accountNumber;
-      document.getElementById('accountBalance').textContent = `💰 Balance: ₹${data.balance.toLocaleString()}`;
-      document.getElementById('accountType').textContent = data.accountType;
-      document.getElementById('customerId').textContent = data.customerId;
-    }
+  if (!custId) {
+    alert("User not logged in.");
+    return;
+  }
 
-    // Transfer Details HTML
+  try {
+
+    
+    const res = await fetch(`http://localhost:8080/accounts/by-custid/${custId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
+      }
+    });
+
+    if (!res.ok) throw new Error('Failed to fetch account');
+
+    const accountData = await res.json();
+    defaultFromAccount = accountData.accountNumber;
+
+    document.getElementById('accountNumber').textContent = accountData.accountNumber;
+    document.getElementById('accountBalance').textContent = `💰 Balance: ₹${accountData.balance.toLocaleString()}`;
+    document.getElementById('accountType').textContent = accountData.accountType;
+    document.getElementById('customerId').textContent = custId;
+
+    return accountData;
+  } catch (err) {
+    console.error(err);
+    alert("Error fetching account details.");
+  }
+}
+    document.addEventListener('DOMContentLoaded', fetchAccountByCustId);
+
+    async function updateAccountCard(accountId) {
+  if (!accountData) {
+    accountData = await fetchAccountByCustId(); // Fetch account data first if not available
+  }
+
+  if (!accountData) return; // If accountData is still null, stop further execution
+
+  // document.getElementById('accountNumber').textContent = accountData.accountNumber;
+  // document.getElementById('accountBalance').textContent = `💰 Balance: ₹${accountData.balance.toLocaleString()}`;
+  // document.getElementById('accountType').textContent = accountData.accountType;
+  // document.getElementById('customerId').textContent = custId;
+}
     function getTransferDetails(method) {
-      if(method === 'self'){
+      if (method === 'self') {
         return `
-        <form id="selfTransferForm" class="transfer-details">
-          <h3>Self Deposit</h3>
-          <div class="input-group">
-            <label>From Account</label>
-            <input type="text" value="${defaultFromAccount}" readonly>
-          </div>
-          <div class="input-group">
-            <label>To Account</label>
-            <input type="text" placeholder="Enter account number">
-          </div>
-          <div class="input-group">
-            <label>Amount (₹)</label>
-            <input type="number" id="amount" placeholder="Enter amount">
-          </div>
-          <div class="input-group">
-            <label>Remarks</label>
-            <input type="text" id="remarks" placeholder="Optional remarks">
-          </div>
-          <div class="input-group">
-            <label>Transaction Mode</label>
-            <select id="mode">
-              <option value="IMPS">IMPS</option>
-              <option value="NEFT">NEFT</option>
-              <option value="RTGS">RTGS</option>
-            </select>
-          </div>
-          <button type="submit" class="btn submit-btn">Transfer</button>
-        </form>`;
-      } else if(method === 'payee'){
+          <form id="selfTransferForm" class="transfer-details">
+            <h3>Self Deposit</h3>
+            <div class="input-group">
+              <label>From Account</label>
+              <input type="text" value="${defaultFromAccount}" readonly> <!-- Default From Account -->
+            </div>
+            <div class="input-group">
+              <label>To Account</label>
+              <input type="text" placeholder="Enter account number">
+            </div>
+            <div class="input-group">
+              <label>Amount (₹)</label>
+              <input type="number" id="amount" placeholder="Enter amount">
+            </div>
+            <div class="input-group">
+              <label>Remarks</label>
+              <input type="text" id="remarks" placeholder="Optional remarks">
+            </div>
+            <div class="input-group">
+              <label>Transaction Mode</label>
+              <select id="mode">
+                <option value="IMPS">IMPS</option>
+                <option value="NEFT">NEFT</option>
+                <option value="RTGS">RTGS</option>
+              </select>
+            </div>
+            <button type="submit" class="btn submit-btn">Transfer</button>
+          </form>
+        `;
+      } else if (method === 'payee') {
         return `
-        <form id="payeeTransferForm" class="transfer-details">
-          <h3>Payee Transfer</h3>
-          <div class="input-group">
-            <label>From Account</label>
-            <input type="text" value="${defaultFromAccount}" readonly>
-          </div>
-          <div class="input-group">
-            <label>Select Payee</label>
-            <select id="payeeSelect">
-              <option value="">Loading...</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label>Amount (₹)</label>
-            <input type="number" id="payeeAmount" placeholder="Enter amount">
-          </div>
-          <div class="input-group">
-            <label>Transaction Mode</label>
-            <select id="payeeMode">
-              <option value="IMPS">IMPS</option>
-              <option value="NEFT">NEFT</option>
-              <option value="RTGS">RTGS</option>
-            </select>
-          </div>
-          <button type="submit" class="btn submit-btn">Transfer</button>
-        </form>`;
-      } else if(method === 'manual'){
+          <form id="payeeTransferForm" class="transfer-details">
+            <h3>Payee Transfer</h3>
+            <div class="input-group">
+              <label>From Account</label>
+              <input type="text" value="${defaultFromAccount}" readonly> <!-- Default From Account -->
+            </div>
+            <div class="input-group">
+              <label>Select Payee</label>
+              <select id="payeeSelect">
+                <option value="">Loading...</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Amount (₹)</label>
+              <input type="number" id="payeeAmount" placeholder="Enter amount">
+            </div>
+            <div class="input-group">
+              <label>Transaction Mode</label>
+              <select id="payeeMode">
+                <option value="IMPS">IMPS</option>
+                <option value="NEFT">NEFT</option>
+                <option value="RTGS">RTGS</option>
+              </select>
+            </div>
+            <button type="submit" class="btn submit-btn">Transfer</button>
+          </form>
+        `;
+      } else if (method === 'manual') {
         return `
-        <form id="manualTransferForm" class="transfer-details">
-          <h3>Bank Transfer</h3>
-          <div class="input-group">
-            <label>Recipient Account Number</label>
-            <input type="text" id="manualAccount" placeholder="Enter account number">
-          </div>
-          <div class="input-group">
-            <label>IFSC Code</label>
-            <input type="text" id="manualIFSC" placeholder="Enter IFSC code">
-          </div>
-          <div class="input-group">
-            <label>Amount (₹)</label>
-            <input type="number" id="manualAmount" placeholder="Enter amount">
-          </div>
-          <div class="input-group">
-            <label>Transaction Mode</label>
-            <select id="manualMode">
-              <option value="IMPS">IMPS</option>
-              <option value="NEFT">NEFT</option>
-              <option value="RTGS">RTGS</option>
-            </select>
-          </div>
-          <button type="submit" class="btn submit-btn">Transfer</button>
-        </form>`;
+          <form id="manualTransferForm" class="transfer-details">
+            <h3>Bank Transfer</h3>
+            <div class="input-group">
+              <label>Recipient Account Number</label>
+              <input type="text" id="manualAccount" placeholder="Enter account number">
+            </div>
+            <div class="input-group">
+              <label>IFSC Code</label>
+              <input type="text" id="manualIFSC" placeholder="Enter IFSC code">
+            </div>
+            <div class="input-group">
+              <label>Amount (₹)</label>
+              <input type="number" id="manualAmount" placeholder="Enter amount">
+            </div>
+            <div class="input-group">
+              <label>Transaction Mode</label>
+              <select id="manualMode">
+                <option value="IMPS">IMPS</option>
+                <option value="NEFT">NEFT</option>
+                <option value="RTGS">RTGS</option>
+              </select>
+            </div>
+            <button type="submit" class="btn submit-btn">Transfer</button>
+          </form>
+        `;
       }
     }
 
-    // Insert transfer form
     async function selectMethod(method, element) {
       document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
       document.querySelectorAll('.transfer-details').forEach(d => d.remove());
@@ -188,7 +251,7 @@
       const html = getTransferDetails(method);
       element.insertAdjacentHTML('afterend', html);
 
-      if(method === 'payee'){
+      if (method === 'payee') {
         payeesList = await fetchPayees();
         const select = document.getElementById('payeeSelect');
         select.innerHTML = payeesList.length
@@ -199,61 +262,101 @@
       setupFormSubmit(method);
     }
 
-    // Form submission
-    function setupFormSubmit(method){
+    async function setupFormSubmit(method) {
       let form;
-      if(method === 'self') form = document.getElementById('selfTransferForm');
-      else if(method === 'payee') form = document.getElementById('payeeTransferForm');
-      else if(method === 'manual') form = document.getElementById('manualTransferForm');
+      if (method === 'self') form = document.getElementById('selfTransferForm');
+      else if (method === 'payee') form = document.getElementById('payeeTransferForm');
+      else if (method === 'manual') form = document.getElementById('manualTransferForm');
 
       form.addEventListener('submit', async e => {
         e.preventDefault();
         let payload = {};
-        if(method === 'self'){
+        if (method === 'self') {
           const toAcc = form.querySelector('input[placeholder="Enter account number"]').value.trim();
           const amt = form.querySelector('#amount').value.trim();
           const mode = form.querySelector('#mode').value;
-          if(!toAcc || !amt) return alert('Enter valid details!');
-          payload = { account:{accountNumber: defaultFromAccount}, recvAcc:{accountNumber: toAcc}, amount: Number(amt), transactionMode: mode };
+          if (!toAcc || !amt) return alert('Enter valid details!');
+          payload = {
+            fromAccount: defaultFromAccount, // Use defaultFromAccount as the fromAccount
+            toAccount: toAcc,
+            amount: Number(amt),
+            transactionMode: mode,
+            remarks: form.querySelector('#remarks').value.trim()
+          };
           await sendTransfer(payload, 'self');
-        } else if(method === 'payee'){
+        } else if (method === 'payee') {
           const payeeAcc = form.querySelector('#payeeSelect').value;
           const amt = form.querySelector('#payeeAmount').value.trim();
           const mode = form.querySelector('#payeeMode').value;
-          if(!payeeAcc || !amt) return alert('Enter valid details!');
-          payload = { account:{accountNumber: defaultFromAccount}, recvAcc:{accountNumber: payeeAcc}, amount: Number(amt), transactionMode: mode };
+          if (!payeeAcc || !amt) return alert('Enter valid details!');
+          payload =           
+          {
+        account: { accountNumber: defaultFromAccount },
+        recvAcc: { accountNumber: payeeAcc },
+        amount: Number(amt),
+        transactionMode: mode
+      };
           await sendTransfer(payload, 'payee');
-        } else if(method === 'manual'){
+        } else if (method === 'manual') {
           const acc = form.querySelector('#manualAccount').value.trim();
           const amt = form.querySelector('#manualAmount').value.trim();
           const mode = form.querySelector('#manualMode').value;
-          if(!acc || !amt) return alert('Enter valid details!');
-          payload = { account:{accountNumber: defaultFromAccount}, recvAcc:{accountNumber: acc}, amount: Number(amt), transactionMode: mode };
+          if (!acc || !amt) return alert('Enter valid details!');
+          
+        payload= {
+        account: { accountNumber: defaultFromAccount },
+        recvAcc: { accountNumber: acc },
+        amount: Number(amt),
+        transactionMode: mode
+      };
           await sendTransfer(payload, 'manual');
         }
       });
     }
 
-    async function sendTransfer(payload, type){
-      let url = '';
-      if(type === 'self' || type === 'manual') url = 'http://localhost:8080/transfers/bank';
-      else if(type === 'payee') url = 'http://localhost:8080/transfers/payee';
+  async function sendTransfer(payload, type) {
+  let url = '';
+  if (type === 'self') url = 'http://localhost:8080/transfers/self';
+  else if (type === 'payee') url = 'http://localhost:8080/transfers/payee';
+  else if (type === 'manual') url = 'http://localhost:8080/transfers/bank';
 
-      try{
-        const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-        if(res.ok) alert('✅ Transfer Successful!');
-        else alert('❌ Transfer Failed');
-        document.querySelectorAll('.transfer-details').forEach(d => d.remove());
-        document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
-        await updateAccountCard(); // refresh balance
-      }catch(err){
-        console.error(err);
-        alert('Network error!');
-      }
+  const username = "user";
+  const password = "1234";
+  const base64Credentials = btoa(username + ":" + password);
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + base64Credentials,  // Add Basic Authentication header
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      alert('✅ Transfer Successful!');
+    } else {
+      alert('❌ Transfer Failed');
     }
 
-    // Initialize page
+    // Clear the form and refresh balance
+    document.querySelectorAll('.transfer-details').forEach(d => d.remove());
+    document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+    await updateAccountCard(accountData.accountId); // Refresh account balance
+  } catch (err) {
+    console.error(err);
+    alert('Network error!');
+  }
+}
     document.addEventListener('DOMContentLoaded', updateAccountCard);
+
+    document.addEventListener('DOMContentLoaded', async () => {
+  const account = await fetchAccountByCustId();
+  if (account) {
+    updateAccountCard(account.accountId);
+  }
+});
   </script>
 </body>
 </html>

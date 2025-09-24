@@ -1,3 +1,8 @@
+const token =localStorage.getItem("jwtToken");
+if(!token){
+    window.location.href="../loginPage/login.html"
+}
+
 // ------------------- Transactions -------------------
 // 20 dummy transactions
 let transactions = [

@@ -78,7 +78,7 @@ document.getElementById("password-form").addEventListener("submit", function (e)
   }
 
   // ===== Login request =====
-  fetch("http://localhost:8080/users/auth/login", {
+  fetch("http://localhost:8080/auth/userlogin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ custId, password })
@@ -87,7 +87,8 @@ document.getElementById("password-form").addEventListener("submit", function (e)
       if (res.ok) {
         const data = await res.json(); // 👈 expect JWT in response
         if (data.token) {
-          localStorage.setItem("jwtToken", data.token); // 🔑 save token
+          localStorage.setItem("jwtToken", data.token);  // Store JWT token
+          localStorage.setItem("custId", custId); // 🔑 save token
           alert("Login successful!");
           setTimeout(() => window.location.href = "../dashBoardPage/accounts.html", 1000);
         } else {

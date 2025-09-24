@@ -125,7 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 alert('Account request submitted successfully!');
                 form.reset();
                 submitBtn.disabled = true;
-                window.location.href = '/landingPage.html'
+                window.location.href = '../landingPage/landingPage.html'
             } else {
                 const errorMsg = await response.text();
                 alert('Error: ' + errorMsg);

@@ -1,4 +1,7 @@
-
+const token =localStorage.getItem("jwtToken");
+if(!token){
+    window.location.href="../loginPage/login.html"
+}
 let generatedEmailOTP = null;
 let generatedAadhaarOTP = null;
 

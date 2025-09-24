@@ -1,3 +1,4 @@
+
 // ✅ Captcha generator
  function generateCaptcha() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";

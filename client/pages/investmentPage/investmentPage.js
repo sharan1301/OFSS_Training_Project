@@ -1,3 +1,8 @@
+// const token =localStorage.getItem("jwtToken");
+// if(!token){
+//     window.location.href="../loginPage/login.html"
+// }
+
 document.addEventListener('DOMContentLoaded', () => {
   const typesList = document.querySelectorAll('.investment-types-list li');
   const benefitsContent = document.getElementById('benefitsContent');
