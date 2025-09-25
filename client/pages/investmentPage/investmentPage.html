@@ -21,6 +21,31 @@
         </div>
     </section>
 
+
+    
+    <!-- Featured Deposits Section - NEW MAIN SECTION -->
+    <section class="featured-deposits">
+        <div class="featured-container">
+            <h2 class="featured-title">Start Your Investment Journey</h2>
+            <p class="featured-subtitle">Choose from our most popular and secure deposit options</p>
+            
+            <div class="featured-buttons" >
+                <button class="featured-deposit-btn fixed-deposit-btn" onclick="openFixedDeposit()">
+                    <div class="btn-icon">🏛️</div>
+                    <div class="btn-title">FIXED DEPOSIT</div>
+                    <div class="btn-description">Secure your money with guaranteed returns. Lock in competitive rates for steady growth.</div>
+                </button>
+                
+                <button class="featured-deposit-btn recurring-deposit-btn" onclick="openRecurringDeposit()">
+                    <div class="btn-icon">📈</div>
+                    <div class="btn-title">RECURRING DEPOSIT</div>
+                    <div class="btn-description">Build wealth systematically. Invest small amounts regularly for long-term financial goals.</div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Investment Types Section -->
     <section class="investment-types-section">
         <div class="investment-types-container">
@@ -64,5 +89,17 @@
 
 
     <script src="investmentPage.js"></script>
+    <script>
+    function openFixedDeposit() {
+        // go from investmentpage → fixeddepositPage/fixeddeposit.html
+        window.location.href = "../fixeddepositPage/fixeddeposit.html";
+    }
+
+    function openRecurringDeposit() {
+        // go from investmentpage → recurringdepositPage/recurringdeposit.html
+        window.location.href = "../recurringdepositPage/recurringdeposit.html";
+    }
+</script>
+
 </body>
 </html>
