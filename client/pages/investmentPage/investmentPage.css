@@ -45,6 +45,164 @@ h1, h2 {
   background-color: #025;
 }
 
+/* Featured Deposits Section */
+.featured-deposits {
+    padding: 80px 20px;
+    background: white;
+    position: relative;
+}
+
+.featured-deposits::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.featured-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featured-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.featured-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 60px;
+}
+
+.featured-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.featured-deposit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 20px;
+    padding: 40px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.featured-deposit-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+.featured-deposit-btn:hover::before {
+    animation: shine 0.6s ease-in-out;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.featured-deposit-btn:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+}
+
+.btn-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.btn-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.btn-description {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.recurring-deposit-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    box-shadow: 0 15px 35px rgba(238, 90, 36, 0.3);
+}
+
+.recurring-deposit-btn:hover {
+    box-shadow: 0 25px 50px rgba(238, 90, 36, 0.4);
+}
+
+/* Responsive Design for Featured Deposits */
+@media (max-width: 768px) {
+    .featured-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-deposit-btn {
+        min-height: 150px;
+        padding: 30px 20px;
+    }
+    
+    .btn-title {
+        font-size: 1.5rem;
+    }
+}
+
+
+
 /* Investment Types Section */
 .investment-types-section {
   padding: 3rem 2rem 5rem 2rem;
