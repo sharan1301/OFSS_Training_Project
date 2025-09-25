@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureBank Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="custLogin.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h1 class="brand">Secure<span>Bank</span></h1>
+      <form id="password-form" class="login-form">
+        <label>Customer ID</label>
+        <input type="text" id="custId" placeholder="Enter Customer ID" required />
+        <div class="password-container">
+          <label for="password">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="password" placeholder="Enter password" />
+            <span id="toggle-password" class="toggle-eye"></span>
+          </div>
+          <ul id="password-error"></ul>
+        </div>
+        <div class="captcha-box">
+          <span id="captcha-text"></span>
+          <button type="button" onclick="generateCaptcha()">↻</button>
+        </div>
+        <input type="text" id="captcha-input" placeholder="Enter Captcha" required />
+        <button type="submit">Login</button>
+      </form>
+      <a id="register" href="../forgetPassPage/forgotPassword.html">Forgot Password?</a>
+      <a id="register" href="../accountRequestPage/accountRequest.html">Don't have an account? Register here</a>
+    </div>
+  </div>
+  <script src="custLogin.js"></script>
+</body>
+</html>

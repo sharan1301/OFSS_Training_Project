@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SecureBank — Dashboard</title>
+  <link rel="stylesheet" href="accounts.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">SecureBank</div>
+      <nav>
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Accounts</a>
+        <a href="../fundTransfer/fundTransfer.html">Transfers</a>
+        <a href="../loanPage/loan.html">Loans</a>
+        <a href="../CreditCard/CreditCard.html">Cards</a>
+        <a href="#">Insurance</a>
+        <a href="../investmentPage/investmentPage.html">Investment</a>
+        <a href="../payeePage/payee.html">Payee</a>
+        <a href="landingPage.html" id="logoutBtn">Logout</a>
+        
+      </nav>
+      <div style="flex:1"></div>
+    </aside>
+
+    <!-- Main -->
+    <main class="dashboard-main">
+        <!-- Top Row / Welcome -->
+        <div class="top-row">
+            <h2 id="greeting">Welcome, Sharayu 👋</h2>
+
+          <!-- NEW Right-side Info Section -->
+          <div class="account-info card">
+            <div class="info-item">
+              <h4>Total Balance</h4>
+              <p>₹ 1,25,000</p>
+            </div>
+            <div class="info-item">
+              <h4>Account Type</h4>
+              <p>Savings</p>
+            </div>
+            <div class="info-item">
+              <h4>Last Login</h4>
+              <p id="datetime"></p>
+            </div>
+          </div>
+        </div>
+
+
+      <!-- Middle Row -->
+      <div class="mid-row">
+        <!-- Left Column: Recent Transactions -->
+        <div class="col left-col">
+          <div class="card">
+            <div class="card-header">
+              <h2>Recent Transactions</h2>
+              <div class="tools">
+                <input id="txSearch" type="text" placeholder="Search description / amount" />
+                <select id="txFilter">
+                  <option value="all">All</option>
+                  <option value="credit">Credit</option>
+                  <option value="debit">Debit</option>
+                </select>
+                <button id="downloadCsv" class="small-btn">Export CSV</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="txTable">
+                <thead>
+                  <tr><th>Date</th><th>Description</th><th>Type</th><th>Amount</th></tr>
+                </thead>
+                <tbody id="txBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col right-col">
+          <div class="card">
+            <h2>Loan & EMI Status</h2>
+            <div class="loan-circles">
+              <div class="loan-circle" data-loan="Home Loan" data-paid="300000" data-total="750000" data-nextemi="12500" data-due="2025-09-25">
+                <svg class="progress-ring" width="120" height="120">
+                  <circle class="progress-ring__background" stroke="#eee" stroke-width="10" fill="transparent" r="50" cx="60" cy="60"/>
+                  <circle class="progress-ring__circle" stroke="#4caf50" stroke-width="10" fill="transparent" r="50" cx="60" cy="60"/>
+                </svg>
+                <div class="loan-info">
+                  <div class="loan-title">Home Loan</div>
+                  <div class="loan-amount">₹0 / ₹0</div>
+                  <div class="loan-next">Next EMI: ₹0</div>
+                </div>
+              </div>
+
+              <div class="loan-circle" data-loan="Car Loan" data-paid="82000" data-total="120000" data-nextemi="5000" data-due="2025-09-10">
+                <svg class="progress-ring" width="120" height="120">
+                  <circle class="progress-ring__background" stroke="#eee" stroke-width="10" fill="transparent" r="50" cx="60" cy="60"/>
+                  <circle class="progress-ring__circle" stroke="#4caf50" stroke-width="10" fill="transparent" r="50" cx="60" cy="60"/>
+                </svg>
+                <div class="loan-info">
+                  <div class="loan-title">Car Loan</div>
+                  <div class="loan-amount">₹0 / ₹0</div>
+                  <div class="loan-next">Next EMI: ₹0 </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifications -->
+          <div class="card">
+            <h2>Notifications <span class="muted small">(<span id="notifCount">0</span>)</span></h2>
+            <ul id="notifications">
+              <!-- Populated in JS -->
+            </ul>
+            <button class="small-link" onclick="clearNotifications()">Clear All</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="accounts.js"></script>
+  <script>
+    // JS to populate circular progress for loans
+    function setProgress(circle, percent) {
+      const radius = circle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      const offset = circumference - (percent / 100) * circumference;
+      circle.style.strokeDashoffset = offset;
+    }
+
+    document.querySelectorAll('.loan-circle').forEach(loan => {
+      const paid = parseInt(loan.dataset.paid);
+      const total = parseInt(loan.dataset.total);
+      const next = loan.dataset.nextemi;
+      const due = loan.dataset.due;
+      const percent = Math.round((paid / total) * 100);
+
+      const circle = loan.querySelector('.progress-ring__circle');
+      const amountLabel = loan.querySelector('.loan-amount');
+      const nextLabel = loan.querySelector('.loan-next');
+
+      amountLabel.textContent = `₹${paid.toLocaleString()} / ₹${total.toLocaleString()}`;
+      nextLabel.textContent = `Next EMI: ₹${parseInt(next).toLocaleString()}`;
+
+      setProgress(circle, percent);
+    });
+  document.getElementById("logoutBtn").addEventListener("click", function (e) {
+    e.preventDefault(); // stop default link navigation
+    const confirmed = confirm("Do you want to logout?");
+    if (confirmed) {
+      window.location.href = "../customerLoginPage/custLogin.html";
+    }
+  });
+
+  </script>
+</body>
+</html>

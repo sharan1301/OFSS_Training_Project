@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SecureBank — Loans</title>
+  <link rel="stylesheet" href="loan.css">
+</head>
+<body>
+  <!-- ========== Header ========== -->
+  <header class="loan-header">
+    <div class="loan-header-content">
+      <nav class="navbar">
+    <div class="logo">SecureBank</div>
+    <ul class="nav-links">
+
+      <li><a href="accounts.html">Dashboard</a></li>
+      <li><a href="#">Apply Now</a></li>
+    </ul>
+  </nav>
+      <div class="text">
+        <h1>
+          Loans: Finance every<br>
+         <span class="nowrap">dream with SecureBank</span>
+        </h1>
+        <p class="loan-info" id="loanInfo">
+          Digital Process | Flexible Repayments |
+          <span class="toggle" id="toggleBtn">
+            Know More <span class="arrow"></span>
+          </span>
+        </p>
+
+        <div class="dropdown-text" id="dropdownText">
+          <p>
+            SecureBank Loans provide tailored solutions for every need—buy a car, 
+            plan a wedding, or grow your business. 
+            Apply online and enjoy flexible, transparent terms.
+            <br>
+            <span class="read-less" id="readLess">
+            Read Less <span class="arrow"></span>
+          </span>
+          </p>
+        </div>
+
+        <div class="buttons">
+          <button class="btn primary" id="helpBtn">Help Me Choose</button>
+          <button class="btn secondary" id="eligibility">Check Eligibility</button>
+        </div>
+        <span class="interest">24,862 people are interested</span>
+      </div>
+      <div class="image">
+        <img src="../../icons/graduation.png" alt="Graduating Girl">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ========== Loan Categories ========== -->
+    <section class="card categories">
+      <h2>Loan Categories</h2>
+      <div class="loan-grid" role="tablist">
+        <button class="loan-card active" data-loan="home">Home Loan</button>
+        <button class="loan-card" data-loan="car">Car Loan</button>
+        <button class="loan-card" data-loan="personal">Personal Loan</button>
+        <button class="loan-card" data-loan="education">Education Loan</button>
+      </div>
+    </section>
+
+    <!-- ========== Loan Contents ========== -->
+
+    <!-- Home Loan Content (default visible) -->
+    <div class="loan-content" data-loan="home">
+      <!-- EMI -->
+    <h1>Home Loan EMI Calculator</h1>
+    
+        <div class="calculator">
+          <div class="controls">
+            <!-- Loan Amount -->
+            <label>Amount</label>
+            <input type="range" id="loanAmount" min="100000" max="50000000" step="100000" value="1000000">
+            <div class="value-display">
+              ₹<span id="amountDisplay">10,00,000</span>
+            </div>
+
+            <!-- Interest Rate -->
+            <label>Interest Rate</label>
+            <input type="range" id="interestRate" min="7" max="20" step="0.1" value="9">
+            <div class="value-display">
+              <span id="rateDisplay">9%</span>
+            </div>
+
+            <!-- Duration -->
+      
+            <div class="duration-options">
+              <label>Duration</label>
+              <button class="duration-btn active" data-months="6">6 Months</button>
+              <button class="duration-btn" data-months="24">2 Years</button>
+              <button class="duration-btn" data-months="60">5 Years</button>
+              <button class="duration-btn custom">Custom</button>
+              <input type="number" id="customDuration" placeholder="Enter months" style="display:none;">
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="results">
+            <h2>Monthly EMI</h2>
+            <p class="emi">₹<span id="emi">0</span></p>
+            <p>Total Interest: ₹<span id="totalInterest">0</span></p>
+            <p>Total Payable: ₹<span id="totalPayment">0</span></p>
+            <button class="apply-btn">APPLY NOW</button>
+          </div>
+        </div>
+
+        <!-- Loan Repayment Schedule -->
+        <div class="schedule">
+          <button class="toggle-schedule">LOAN REPAYMENT SCHEDULE ⌄</button>
+          <div class="schedule-table" style="display:none;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Principal Paid</th>
+                  <th>Interest Charged</th>
+                  <th>Total Payment</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Split: Required Documents + How to Apply -->
+      <div class="split">
+        <div class="card split-left">
+          <h2>Required Documents for Home Loan</h2>
+          <div class="doc-toggle">
+            <button class="doc-tab active" data-doc="salaried">Salaried Individuals</button>
+            <button class="doc-tab" data-doc="self">Self Employed Individuals</button>
+          </div>
+          <ul id="hlDocSalaried" class="doc-list">
+            <li><span class="icon">👤</span> Proof of identity</li>
+            <li><span class="icon">👤</span> Latest 6 months' bank statements</li>
+            <li><span class="icon">👤</span> Salary slips</li>
+          </ul>
+          <ul id="hlDocSelf" class="doc-list" hidden>
+            <li><span class="icon">👤</span> Proof of identity</li>
+            <li><span class="icon">👤</span> Business proof</li>
+            <li><span class="icon">👤</span> Income Tax Returns</li>
+          </ul>
+          <a href="#" class="apply-link">APPLY NOW</a>
+        </div>
+        <div class="card split-right">
+          <h2>How to Apply for a Home Loan?</h2>
+          <div class="timeline">
+            <div class="step"><span class="dot"></span> Enter loan amount</div>
+            <div class="step"><span class="dot"></span> Provide details</div>
+            <div class="step"><span class="dot"></span> Review amount & tenure</div>
+            <div class="step"><span class="dot"></span> Confirm application</div>
+            <div class="step"><span class="dot"></span> Loan disbursed</div>
+          </div>
+          <a href="#" class="apply-link">APPLY NOW</a>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="spit-faqs">
+      <div class="faq-section">
+      <h2>Car loan FAQs</h2>
+      <div class="faq">
+        <button class="faq-question">What is a Car Loan?</button>
+        <div class="faq-answer">A car loan is a financial product that helps you purchase a car with borrowed funds from a bank or financial institution.</div>
+      </div>
+      <div class="faq">
+        <button class="faq-question">How do I apply for a Car Loan?</button>
+        <div class="faq-answer">You can apply online or visit your nearest bank branch. Documents like ID proof, address proof, and income proof are required.</div>
+      </div>
+      <div class="faq">
+        <button class="faq-question">Will I get 100% funding for purchasing a car?</button>
+        <div class="faq-answer">Banks usually provide 80–90% funding. Some institutions offer 100% for select vehicles.</div>
+      </div>
+      <div class="faq">
+        <button class="faq-question">What's the maximum loan amount that can be taken for a new car?</button>
+        <div class="faq-answer">It depends on your income, credit score, and bank policy. Generally, up to ₹50 lakh can be sanctioned.</div>
+      </div>
+      <div class="faq">
+        <button class="faq-question">What is the tenure of the loan to buy a new car?</button>
+        <div class="faq-answer">Tenure typically ranges from 12 months to 7 years.</div>
+      </div>
+      <div class="faq">
+        <button class="faq-question">What is the minimum credit score required to get a Car Loan?</button>
+        <div class="faq-answer">Most banks require a credit score of 700+ for quick approval.</div>
+      </div>
+      <a href="#" class="view-all">VIEW ALL FAQ’S</a>
+    </div>
+
+    <!-- Blog Section -->
+    <div class="blog-section">
+      <h2>Blogs</h2>
+      <span class="badge">Blogs</span>
+      <div class="blog-card">
+        <img src="https://via.placeholder.com/400x200.png?text=Car+Loan+Blog" alt="Car Loan Blog">
+        <h3>Sharing financial details for a car loan: An easy & secure process</h3>
+        <p class="meta">2 Mins Read | 6 Months Ago</p>
+        <a href="#" class="read-more">READ NOW</a>
+      </div>
+    </div>
+    </div>
+
+    <!-- Car Loan Content (hidden by default) -->
+    <div class="loan-content" data-loan="car" hidden>
+      <!-- Car loan EMI, Required Docs, How to Apply, FAQ similar to Home Loan -->
+      <h2>Car Loan EMI Calculator</h2>
+      <p>Content for Car Loan...</p>
+    </div>
+
+    <!-- Personal Loan Content (hidden by default) -->
+    <div class="loan-content" data-loan="personal" hidden>
+      <!-- Personal Loan EMI, Required Docs, How to Apply, FAQ similar to Home Loan -->
+      <h2>Personal Loan EMI Calculator</h2>
+      <p>Content for Personal Loan...</p>
+    </div>
+
+    <!-- Education Loan Content (hidden by default) -->
+    <div class="loan-content" data-loan="education" hidden>
+      <!-- Education Loan EMI, Required Docs, How to Apply, FAQ similar to Home Loan -->
+      <h2>Education Loan EMI Calculator</h2>
+      <p>Content for Education Loan...</p>
+    </div>
+    
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© SecureBank — All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script src="loan.js"></script>
+</body>
+</html>

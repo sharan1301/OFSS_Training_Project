@@ -8,41 +8,39 @@
 </head>
 <body>
     <div class="admin-container">
-        
-       <nav class="sidebar">
-  <h2>🏦 SecureBank</h2>
-  <a href="../admin/admindashboard.html" class="nav-link">📊 Dashboard</a>
-  <a href="pending-requests.html" class="nav-link active">📋 Pending Requests</a>
-  <a href="../UserDetails/UserDetails.html" class="nav-link">👥 Users</a>
-  <a href="../adminDetails/adminDetails.html" class="nav-link">👤 Admin Details</a>
-  <a href="#" class="nav-link logout" onclick="logout()">🚪 Log Out</a>
-</nav>
+        <nav class="sidebar">
+            <h2>🏦 SecureBank</h2>
+            <a href="../admin/admindashboard.html" class="nav-link">📊 Dashboard</a>
+            <a href="pending-requests.html" class="nav-link active">📋 Pending Requests</a>
+            <a href="../UserDetails/UserDetails.html" class="nav-link">👥 Users</a>
+            <a href="../adminDetails/adminDetails.html" class="nav-link">👤 Admin Details</a>
+            <a href="#" class="nav-link logout" onclick="logout()">🚪 Log Out</a>
+        </nav>
 
-
-     
         <div class="main-content">
-          
             <header class="header">
-                <h1>Pending Requests</h1>
+                <h1>Pending Requests Management</h1>
                 <div class="admin-info">
-                    <span>Welcome, <strong id="adminName">Admin John Doe</strong></span>
+                    <span>Welcome, <strong id="adminName">Admin</strong></span>
+                    <button onclick="refreshData()" class="refresh-btn" title="Refresh Data">🔄</button>
                 </div>
             </header>
 
-         
             <div class="content-area">
+                <!-- Tab buttons added dynamically by JS -->
+
                 <div class="table-container">
                     <table class="requests-table" id="requestsTable">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Account Type</th>
+                                <th>Name</th>
+                                <th>Type</th>
                                 <th>Date Applied</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="requestsTableBody">
-                       
+                            <!-- Table content populated by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -50,58 +48,66 @@
         </div>
     </div>
 
-  
+    <!-- Modal for viewing request details -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-header">
-                <h2>User Details</h2>
+                <h2>Request Details</h2>
                 <button class="close-btn" id="closeModal">&times;</button>
             </div>
             <div class="modal-content">
                 <div class="user-details">
+                    <div class="section-header">
+                        <h3>Personal Information</h3>
+                    </div>
                     <div class="detail-box">
-                        <label>Username:</label>
+                        <label>Full Name:</label>
                         <span id="modalUsername"></span>
                     </div>
                     <div class="detail-box">
-                        <label>Email:</label>
+                        <label>Email Address:</label>
                         <span id="modalEmail"></span>
-                    </div>
-                    <div class="detail-box">
-                        <label>Date of Birth:</label>
-                        <span id="modalDob"></span>
-                    </div>
-                    <div class="detail-box">
-                        <label>Occupation:</label>
-                        <span id="modalOccupation"></span>
-                    </div>
-                    <div class="detail-box">
-                        <label>Aadhar Number:</label>
-                        <span id="modalAadhar"></span>
                     </div>
                     <div class="detail-box">
                         <label>Mobile Number:</label>
                         <span id="modalMobile"></span>
                     </div>
                     <div class="detail-box">
-                        <label>Account Type Applied:</label>
+                        <label>Occupation:</label>
+                        <span id="modalOccupation"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Aadhaar Number:</label>
+                        <span id="modalAadhar"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>PAN Number:</label>
+                        <span id="modalPan"></span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Account Type / Card:</label>
                         <span id="modalAccountType"></span>
                     </div>
                     <div class="detail-box">
-                        <label>Residential Address:</label>
-                        <span id="modalAddress"></span>
+                        <label>Annual Income:</label>
+                        <span id="modalAnnualIncome"></span>
                     </div>
-                    <div class="detail-box comments-box">
-                        <label for="commentsTextarea">Comments:</label>
-                        <textarea id="commentsTextarea" placeholder="Add your comments here..."></textarea>
+                    <div class="detail-box">
+                        <label>Card Type:</label>
+                        <span id="modalCardType"></span>
                     </div>
+                    <div class="detail-box">
+                        <label>Employer:</label>
+                        <span id="modalEmployer"></span>
+                    </div>
+                   
                 </div>
-                
             </div>
+            
         </div>
     </div>
 
-    <script src="pending-requests.js"></script>
-  
+    <!-- Link to your JS -->
+    <script src="pending-requests.js" defer></script>
 </body>
 </html>

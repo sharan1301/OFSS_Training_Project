@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Manage Payees</title>
+    <link rel="stylesheet" href="payee.css" />
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Secure Bank</h2>
+            <!-- future navbar goes here -->
+            <nav>
+                <a href="#" class="nav-link active">Payees</a>
+                <a href="#" class="nav-link">Account Details</a>
+                <a href="#" class="nav-link">Transactions</a>
+            </nav>
+        </aside>
+        <main>
+            <section class="add-payee-section">
+                <h2>Add New Payee</h2>
+                <form id="addPayeeForm" autocomplete="off">
+                    <div class="form-group">
+                        <label for="beneficiaryName">Beneficiary Name *</label>
+                        <input type="text" id="beneficiaryName" name="beneficiaryName" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaryAccountNum">Account Number *</label>
+                        <input type="text" id="beneficiaryAccountNum" name="beneficiaryAccountNum" required maxlength="18">
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+    <label for="ifscCode">IFSC Code *</label>
+    <input type="text" id="ifscCode" name="ifscCode" required maxlength="11" minlength="11" />
+    <div class="error-message"></div>
+</div>
+
+
+                    
+                    <button type="submit" class="submit-btn">Save Beneficiary</button>
+                </form>
+            </section>
+
+            <section class="payee-list-section">
+                <h2>Existing Payees</h2>
+                <ul class="payee-list" id="payeeList">
+                    <!-- dynamically populated -->
+                </ul>
+            </section>
+
+            <section class="payee-detail-section" id="payeeDetailSection" style="display: none;">
+                <h2>Payee Details</h2>
+                <div id="payeeDetail">
+                    <!-- dynamically populated -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="payee.js"></script>
+</body>
+</html>

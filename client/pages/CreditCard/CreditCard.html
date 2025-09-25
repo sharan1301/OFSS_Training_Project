@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Card Apply</title>
+  <link rel="stylesheet" href="CreditCard.css">
+  <link rel="stylesheet" href="../components/navbar.css" />
+</head>
+<body>
+
+
+  
+ <div id="navbar-placeholder"></div>
+  <!-- rest of your page content -->
+  <script src="../components/navbar.js"></script>
+
+
+
+<section class="creditcards-section">
+    <h2>Credit Cards</h2>
+    <div class="creditcards-row">
+        <!-- Sapphire Card -->
+        <div class="creditcard-card">
+            <div class="card-img-container">
+                <div class="card-img-container">
+                <div class="card-container">
+        <div class="card-face card-front">
+            <div class="shine"></div>
+            <div class="chip"></div>
+            <div class="card-number">XXXX XXXX XXXX XXXX</div>
+            <div class="card-holder">
+                <div>
+                    <div class="holder-title">Card Holder</div>
+                    <div class="holder-name">XXXXX XXXXXX</div>
+                </div>
+                <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">09/26</div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="brand-name">SILVER</div>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- <img src="https://via.placeholder.com/320x180/025/fff?text=Sapphiro+Card" alt="Sapphiro Card" class="creditcard-img"> -->
+            </div>
+            <div class="card-content">
+                <div class="card-actions">
+                    <button class="card-apply-btn" onclick="openForm('Silver Card')">APPLY</button>
+                    <button class="card-details-btn" onclick="window.location.href='Silver.html'">DETAILS</button>
+                </div>
+            </div>
+        </div>
+        <!-- Rubyx Card -->
+        <div class="creditcard-card">
+            <div class="card-img-container">
+                <div class="card-img-container">
+                <div class="card-container">
+        <div class="card-face card-front2">
+            <div class="shine"></div>
+            <div class="chip"></div>
+            <div class="card-number">XXXX XXXX XXXX XXXX</div>
+            <div class="card-holder">
+                <div>
+                    <div class="holder-title">Card Holder</div>
+                    <div class="holder-name">XXXXX XXXXXX</div>
+                </div>
+                <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">09/26</div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="brand-name">GOLD</div>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- <img src="https://via.placeholder.com/320x180/049/fff?text=Rubyx+Card" alt="Rubyx Card" class="creditcard-img"> -->
+            </div>
+            <div class="card-content">
+                <div class="card-actions">
+                    <button class="card-apply-btn" onclick="openForm('Gold Card')">APPLY</button>
+                    <button class="card-details-btn" onclick="window.location.href='Gold.html'">DETAILS</button>
+                </div>
+            </div>
+        </div>
+        <!-- Coral Card -->
+        <div class="creditcard-card">
+            <div class="card-img-container">
+               <div class="card-img-container">
+   
+    <div class="card-container">
+        <div class="card-face card-front3">
+            <div class="shine"></div>
+            <div class="chip"></div>
+            <div class="card-number">XXXX XXXX XXXX XXXX</div>
+            <div class="card-holder">
+                <div>
+                    <div class="holder-title">Card Holder</div>
+                    <div class="holder-name">XXXXXX XXXXXXX</div>
+                </div>
+                <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">09/26</div>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="brand-name">PLATINUM</div>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- <img src="https://via.placeholder.com/320x180/9cc/fff?text=Coral+Card" alt="Coral Card" class="creditcard-img"> -->
+            </div>
+            <div class="card-content">
+                <div class="card-actions">
+                    <button class="card-apply-btn" onclick="openForm('Platinum card')">APPLY</button>
+                    <button class="card-details-btn" onclick="window.location.href='Platinum.html'" >DETAILS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- Hidden Application Form -->
+<section id="apply-form" class="hidden">
+  <div class="form-container">
+    <h2>Credit Card Application</h2>
+
+    <!-- Added JS handler (submitApplication) -->
+    <form id="creditForm">
+
+      <!-- Card Type (changed from text input to ENUM dropdown) -->
+      <label>Applying for Card</label>
+      <select id="cardType" name="cardType" required>
+        <option value="PLATINUM">Platinum</option>
+        <option value="GOLD">Gold</option>
+        <option value="CLASSIC">Classic</option>
+      </select>
+
+      <!-- Personal Info -->
+      <label>Full Name</label>
+      <input type="text" id="fullName" name="fullName"
+        pattern="[A-Za-z\s]{3,50}"
+        title="Only letters and spaces, 3-50 characters" required>
+
+      <label>Email</label>
+      <div class="input-with-btn">
+        <!-- changed id to emailAddress -->
+        <input type="email" id="emailAddress" name="emailAddress" required>
+        <button type="button" class="btn small-btn" onclick="sendEmailOTP()">Send OTP</button>
+      </div>
+
+      <label>Enter Email OTP</label>
+      <div class="input-with-btn">
+        <input type="text" id="emailOtp" placeholder="Enter 6-digit OTP"
+          pattern="\d{6}" title="Enter a 6-digit OTP" required>
+        <button type="button" class="btn small-btn" onclick="verifyEmailOTP()">Verify</button>
+      </div>
+
+      <label>Phone Number</label>
+      <!-- changed id to mobileNumber -->
+      <input type="tel" id="mobileNumber" name="mobileNumber"
+        pattern="[6-9]\d{9}"
+        title="Enter valid 10-digit phone number starting with 6-9" required>
+
+      <label>Date of Birth</label>
+      <!-- changed id to dateOfBirth -->
+      <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+
+      <label>Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="">-- Select --</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <label>Marital Status</label>
+      <select id="marital" name="marital" required>
+        <option value="">-- Select --</option>
+        <option>Single</option>
+        <option>Married</option>
+        <option>Other</option>
+      </select>
+
+      <!-- Employment & Income -->
+      <label>Occupation</label>
+      <input type="text" id="occupation" name="occupation"
+        pattern="[A-Za-z\s]{2,50}"
+        title="Only letters and spaces, 2-50 characters" required>
+
+      <!-- Changed to Annual Income -->
+      <label>Annual Income (INR)</label>
+      <input type="number" id="annualIncome" name="annualIncome"
+        min="60000" max="12000000" step="100"
+        title="Enter annual income between 60000 and 12000000" required>
+
+      <label>Employer</label>
+      <input type="text" id="employer" name="employer">
+
+      <!-- Documents -->
+      <label>Aadhaar Number</label>
+      <div class="input-with-btn">
+        <!-- changed id to aadhaarNumber -->
+        <input type="text" id="aadhaarNumber" name="aadhaarNumber"
+          maxlength="12" pattern="\d{12}"
+          title="Enter valid 12-digit Aadhaar number" required>
+        <!-- <button type="button" class="btn small-btn" onclick="sendAadhaarOTP()">Send OTP</button> -->
+      </div>
+
+      <!-- <label>Enter Aadhaar OTP</label>
+      <div class="input-with-btn">
+        <input type="text" id="aadhaarOtp" placeholder="Enter 6-digit OTP"
+          pattern="\d{6}" title="Enter 6-digit OTP" required>
+        <button type="button" class="btn small-btn" onclick="verifyAadhaarOTP()">Verify</button>
+      </div> -->
+
+      
+
+      <label>PAN Number</label>
+      <!-- changed id to panNumber -->
+      <input type="text" id="panNumber" name="panNumber"
+        maxlength="10" title="Enter valid 10-character PAN" required>
+
+      <!-- <label>Upload PAN Card</label>
+      <input type="file" accept="image/*,.pdf" required> -->
+
+      <label>Address</label>
+      <input type="text" id="address" name="address"
+        minlength="10" maxlength="200" required>
+
+      <label>Pincode</label>
+      <input type="text" id="pincode" name="pincode"
+        pattern="\d{6}" required>
+
+      <label>City</label>
+      <input type="text" id="city" name="city" required>
+
+      <label>State</label>
+      <input type="text" id="state" name="state" required>
+
+      <!-- Payment Method -->
+      <label>Payment Method</label>
+      <select id="paymentMethod" name="paymentMethod" required>
+        <option value="AUTO">Auto</option>
+        <option value="MANUAL">Manual</option>
+      </select>
+
+      <button type="submit" class="btn submit-btn">Submit Application</button>
+    </form>
+  </div>
+</section>
+
+<!-- Check Application Status Form -->
+<section id="apply-form">
+  <div class="form-container">
+    <h2>Check Application Status</h2>
+    <form id="statusCheckForm" onsubmit="return checkStatus()">
+      <label>Aadhaar Number</label>
+      <input type="text" id="statusAadhaar" placeholder="Enter 12-digit Aadhaar" pattern="\d{12}" required>
+
+      <button type="submit" class="btn submit-btn">Check Status</button>
+    </form>
+
+    <div id="statusResult" style="margin-top: 15px;"></div>
+  </div>
+</section>
+
+<script>
+  let emailSentOTP = null;
+  let aadhaarSentOTP = null;
+
+  function sendEmailOTP() {
+    emailSentOTP = Math.floor(100000 + Math.random() * 900000);
+    alert("Email OTP: " + emailSentOTP); // Replace with actual sending logic
+  }
+
+  function verifyEmailOTP() {
+    const entered = document.getElementById("emailOtp").value;
+    if (entered == emailSentOTP) {
+      alert("Email verified!");
+    } else {
+      alert("Invalid OTP!");
+    }
+  }
+
+  function sendAadhaarOTP() {
+    aadhaarSentOTP = Math.floor(100000 + Math.random() * 900000);
+    alert("Aadhaar OTP: " + aadhaarSentOTP); // Replace with actual sending logic
+  }
+
+  function verifyAadhaarOTP() {
+    const entered = document.getElementById("aadhaarOtp").value;
+    if (entered == aadhaarSentOTP) {
+      alert("Aadhaar verified!");
+    } else {
+      alert("Invalid OTP!");
+    }
+  }
+
+  function validateForm() {
+    const form = document.getElementById("creditForm");
+    if (!form.checkValidity()) {
+      alert("Please fill all required fields correctly!");
+      return false;
+    }
+    alert("Form submitted successfully!");
+    return true;
+  }
+</script>
+
+
+  </main>
+
+  <!-- SVG Definitions -->
+  <svg style="display:none;">
+    <g id="chip-lines">
+      <polyline points="0,50 35,50"></polyline>
+      <polyline points="0,20 20,20 35,35"></polyline>
+      <polyline points="50,0 50,35"></polyline>
+      <polyline points="65,35 80,20 100,20"></polyline>
+      <polyline points="100,50 65,50"></polyline>
+      <polyline points="35,35 65,35 65,65 35,65 35,35"></polyline>
+      <polyline points="0,80 20,80 35,65"></polyline>
+      <polyline points="50,100 50,65"></polyline>
+      <polyline points="65,65 80,80 100,80"></polyline>
+    </g>
+  </svg>
+
+  <svg style="display:none;">
+    <g id="contactless-icon">
+      <path d="M9.172 15.172a4 4 0 0 1 5.656 0"></path>
+      <path d="M6.343 12.343a8 8 0 0 1 11.314 0"></path>
+      <path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0"></path>
+    </g>
+  </svg>
+
+  <script src="CreditCard.js"></script>
+  <script>
+  function openForm(cardName) {
+    // Show form
+    document.getElementById("apply-form").classList.remove("hidden");
+    
+    // Scroll to form
+    document.getElementById("apply-form").scrollIntoView({ behavior: "smooth" });
+
+    // Set card name
+    document.getElementById("cardName").value = cardName;
+  }
+</script>
+
+</body>
+</html>
