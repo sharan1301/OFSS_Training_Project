@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Statement</title>
+  <link rel="stylesheet" href="./viewTransaction.css">
+  <!-- html2pdf library for PDF download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <!-- Container to wrap everything for PDF -->
+  <div id="statementContainer">
+    <header class="statement-header">
+      <h1>Bank Statement</h1>
+    </header>
+
+    <!-- Filters -->
+    <div class="filters-container">
+      <div class="filters-row">
+        <div class="filter-item">
+          <label for="fromDate">From Date</label>
+          <input type="date" id="fromDate">
+        </div>
+        <div class="filter-item">
+          <label for="toDate">To Date</label>
+          <input type="date" id="toDate">
+        </div>
+        <div class="filter-item">
+          <label for="type">Transaction Type</label>
+          <select id="type">
+            <option value="">All</option>
+            <option value="CREDIT">Credit</option>
+            <option value="DEBIT">Debit</option>
+            <option value="TRANSFER">Transfer</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label for="minAmount">Min Amount</label>
+          <input type="number" id="minAmount" placeholder="0">
+        </div>
+        <div class="filter-item">
+          <label for="maxAmount">Max Amount</label>
+          <input type="number" id="maxAmount" placeholder="0">
+        </div>
+      </div>
+      <div class="search-row">
+        <label for="search">Search Description</label>
+        <input type="text" id="search" placeholder="Enter keyword">
+      </div>
+      <div class="button-row">
+        <button class="apply-btn" onclick="applyFilters()">Apply Filters</button>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary">
+      <div>
+        <h3>Current Balance</h3>
+        <p id="currentBalance">₹0</p>
+      </div>
+      <div>
+        <h3>Total Credits</h3>
+        <p id="totalCredits">₹0</p>
+      </div>
+      <div>
+        <h3>Total Debits</h3>
+        <p id="totalDebits">₹0</p>
+      </div>
+    </div>
+
+    <!-- Statement Table -->
+    <table class="statement-table" id="statementTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <!-- <th>Description</th> -->
+          <th>Transaction Type</th>
+          <th>Mode</th>
+          <th>Status</th>
+          <th>Credit</th>
+          <th>Debit</th>
+          <th>Balance</th>
+          <!-- <th>From → To</th> -->
+        </tr>
+      </thead>
+      <tbody id="statementTableBody"></tbody>
+    </table>
+  </div> <!-- End statementContainer -->
+
+  <!-- Download PDF Button -->
+  <div style="text-align: right; margin: 20px;">
+    <button id="download-btn" class="download-btn">Download PDF</button>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Your Bank. All rights reserved.
+  </div>
+
+  <!-- JS -->
+  <script src="./viewTransaction.js"></script>
+  <script>
+    document.getElementById("download-btn").addEventListener("click", () => {
+      const element = document.getElementById("statementContainer");
+      html2pdf().set({
+        margin: 0.3,
+        filename: 'Bank_Statement.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3, useCORS: true, scrollY: -window.scrollY },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }).from(element).save();
+    });
+  </script>
+</body>
+</html>

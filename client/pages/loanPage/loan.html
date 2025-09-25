@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SecureBank — Loans</title>
-  <link rel="stylesheet" href="loan.css">
+  <link rel="stylesheet" href="./loan.css">
 </head>
 <body>
   <!-- ========== Header ========== -->
@@ -14,8 +14,8 @@
     <div class="logo">SecureBank</div>
     <ul class="nav-links">
 
-      <li><a href="accounts.html">Dashboard</a></li>
-      <li><a href="#">Apply Now</a></li>
+      <li><a href="../dashBoardPage/accounts.html">Dashboard</a></li>
+      <li><a href="../loanRequests/loanRequest.html">Apply Now</a></li>
     </ul>
   </nav>
       <div class="text">
@@ -44,7 +44,7 @@
 
         <div class="buttons">
           <button class="btn primary" id="helpBtn">Help Me Choose</button>
-          <button class="btn secondary" id="eligibility">Check Eligibility</button>
+          <button class="btn secondary" id="eligibility" onclick="redirectToPage()">Apply Now</button>
         </div>
         <span class="interest">24,862 people are interested</span>
       </div>
@@ -59,10 +59,10 @@
     <section class="card categories">
       <h2>Loan Categories</h2>
       <div class="loan-grid" role="tablist">
-        <button class="loan-card active" data-loan="home">Home Loan</button>
-        <button class="loan-card" data-loan="car">Car Loan</button>
-        <button class="loan-card" data-loan="personal">Personal Loan</button>
-        <button class="loan-card" data-loan="education">Education Loan</button>
+        <div class="loan-card">Home Loan</div>
+        <div class="loan-card">Car Loan</div>
+        <div class="loan-card">Personal Loan</div>
+        <div class="loan-card">Education Loan</div>
       </div>
     </section>
 
@@ -70,164 +70,168 @@
 
     <!-- Home Loan Content (default visible) -->
     <div class="loan-content" data-loan="home">
-      <!-- EMI -->
-    <h1>Home Loan EMI Calculator</h1>
-    
-        <div class="calculator">
-          <div class="controls">
-            <!-- Loan Amount -->
-            <label>Amount</label>
-            <input type="range" id="loanAmount" min="100000" max="50000000" step="100000" value="1000000">
-            <div class="value-display">
-              ₹<span id="amountDisplay">10,00,000</span>
-            </div>
+  <h1>Loan EMI Calculator</h1>
 
-            <!-- Interest Rate -->
-            <label>Interest Rate</label>
-            <input type="range" id="interestRate" min="7" max="20" step="0.1" value="9">
-            <div class="value-display">
-              <span id="rateDisplay">9%</span>
-            </div>
+  <div class="calculator">
+    <div class="controls">
 
-            <!-- Duration -->
-      
-            <div class="duration-options">
-              <label>Duration</label>
-              <button class="duration-btn active" data-months="6">6 Months</button>
-              <button class="duration-btn" data-months="24">2 Years</button>
-              <button class="duration-btn" data-months="60">5 Years</button>
-              <button class="duration-btn custom">Custom</button>
-              <input type="number" id="customDuration" placeholder="Enter months" style="display:none;">
-            </div>
+      <!-- Loan Amount -->
+      <div class="control-group">
+        <label>Amount</label>
+        <div class="inline-control">
+          <input type="range" id="loanAmount" min="100000" max="10000000" step="100000" value="1000000">
+          <div class="range-labels" id="loanAmountLabels">
+            <span data-value="100000">1L</span>
+            <span data-value="1000000">10L</span>
+            <span data-value="5000000">50L</span>
           </div>
-
-          <!-- Results -->
-          <div class="results">
-            <h2>Monthly EMI</h2>
-            <p class="emi">₹<span id="emi">0</span></p>
-            <p>Total Interest: ₹<span id="totalInterest">0</span></p>
-            <p>Total Payable: ₹<span id="totalPayment">0</span></p>
-            <button class="apply-btn">APPLY NOW</button>
-          </div>
+          <input type="number" id="customLoanAmount">
         </div>
-
-        <!-- Loan Repayment Schedule -->
-        <div class="schedule">
-          <button class="toggle-schedule">LOAN REPAYMENT SCHEDULE ⌄</button>
-          <div class="schedule-table" style="display:none;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Month</th>
-                  <th>Principal Paid</th>
-                  <th>Interest Charged</th>
-                  <th>Total Payment</th>
-                  <th>Balance</th>
-                </tr>
-              </thead>
-              <tbody id="scheduleBody"></tbody>
-            </table>
-          </div>
+        <div class="value-display">
+          ₹<span id="amountDisplay">10,00,000</span>
         </div>
       </div>
 
+      <!-- Interest Rate -->
+      <div class="control-group">
+        <label>Interest Rate</label>
+        <div class="inline-control">
+          <input type="range" id="interestRate" min="7" max="20" step="0.1" value="9">
+          <div class="range-labels" id="interestRateLabels">
+            <span data-value="7">7%</span>
+            <span data-value="10">10%</span>
+            <span data-value="15">15%</span>
+            <span data-value="20">20%</span>
+          </div>
+          <input type="number" id="customInterestRate" step="0.1">
+        </div>
+        <div class="value-display">
+          <span id="rateDisplay">9%</span>
+        </div>
+      </div>
+
+      <!-- Duration -->
+      <div class="duration-options">
+        <label>Duration</label>
+        <button class="duration-btn active" data-months="6">6 Months</button>
+        <button class="duration-btn" data-months="24">2 Years</button>
+        <button class="duration-btn" data-months="60">5 Years</button>
+        <button class="duration-btn custom">Custom</button>
+        <input type="number" id="customDuration" placeholder="Enter months" style="display:none;">
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="results">
+      <h2>Monthly EMI</h2>
+      <p class="emi">₹<span id="emi">0</span></p>
+      <p>Total Interest: ₹<span id="totalInterest">0</span></p>
+      <p>Total Payable: ₹<span id="totalPayment">0</span></p>
+      <button class="apply-btn" onclick="redirectToPage()">APPLY NOW</button>
+    </div>
+  </div>
+</div>
       <!-- Split: Required Documents + How to Apply -->
       <div class="split">
-        <div class="card split-left">
-          <h2>Required Documents for Home Loan</h2>
-          <div class="doc-toggle">
-            <button class="doc-tab active" data-doc="salaried">Salaried Individuals</button>
-            <button class="doc-tab" data-doc="self">Self Employed Individuals</button>
-          </div>
-          <ul id="hlDocSalaried" class="doc-list">
-            <li><span class="icon">👤</span> Proof of identity</li>
-            <li><span class="icon">👤</span> Latest 6 months' bank statements</li>
-            <li><span class="icon">👤</span> Salary slips</li>
-          </ul>
-          <ul id="hlDocSelf" class="doc-list" hidden>
-            <li><span class="icon">👤</span> Proof of identity</li>
-            <li><span class="icon">👤</span> Business proof</li>
-            <li><span class="icon">👤</span> Income Tax Returns</li>
-          </ul>
-          <a href="#" class="apply-link">APPLY NOW</a>
-        </div>
-        <div class="card split-right">
-          <h2>How to Apply for a Home Loan?</h2>
-          <div class="timeline">
-            <div class="step"><span class="dot"></span> Enter loan amount</div>
-            <div class="step"><span class="dot"></span> Provide details</div>
-            <div class="step"><span class="dot"></span> Review amount & tenure</div>
-            <div class="step"><span class="dot"></span> Confirm application</div>
-            <div class="step"><span class="dot"></span> Loan disbursed</div>
-          </div>
-          <a href="#" class="apply-link">APPLY NOW</a>
-        </div>
-      </div>
+  <div class="card split-left">
+    <h2>Required Documents for Loan</h2>
+    <div class="doc-toggle">
+      <button class="doc-tab active" data-doc="salaried">Salaried Individuals</button>
+      <button class="doc-tab" data-doc="self">Self Employed Individuals</button>
+    </div>
+    <ul id="hlDocSalaried" class="doc-list">
+      <li><span class="icon">👤</span> Government-issued proof of identity such as Aadhaar card, PAN card, or passport</li>
+      <li><span class="icon">👤</span> Bank statements of the last 6 months</li>
+      <li><span class="icon">👤</span> Recent salary slips from the last 3 months issued by your employer</li>
+      <li><span class="icon">👤</span> Employment verification letter to confirm your current employment status</li>
+      <li><span class="icon">👤</span> Recent utility bills as proof of residential address</li>
+    </ul>
+    <ul id="hlDocSelf" class="doc-list" hidden>
+      <li><span class="icon">👤</span> Government-issued proof of identity such as Aadhaar card, PAN card, or passport</li>
+      <li><span class="icon">👤</span> Business registration certificate or proof of business ownership</li>
+      <li><span class="icon">👤</span> Income Tax Returns of the last 2 years</li>
+      <li><span class="icon">👤</span> Bank statements of the business account for the last 6 months showing income and expenses</li>
+      <li><span class="icon">👤</span> Any professional licenses relevant to your business</li>
+    </ul>
+    <a href="../loanRequests/loanRequest.html" class="apply-link">APPLY NOW</a>
+  </div>
+
+  <div class="card split-right">
+    <h2>How to Apply for a Loan?</h2>
+    <div class="timeline">
+      <div class="step"><span class="dot"></span> Enter the desired loan amount and select the loan tenure</div>
+      <div class="step"><span class="dot"></span> Provide your details accurately in the application form</div>
+      <div class="step"><span class="dot"></span> Keep all the required documents ready for verification</div>
+      <div class="step"><span class="dot"></span> Review and confirm submission to initiate the loan approval process</div>
+      <div class="step"><span class="dot"></span> Once approved, the amount will be disbursed to your bank account</div>
+    </div>
+    <a href="../loanRequests/loanRequest.html" class="apply-link">APPLY NOW</a>
+  </div>
+</div>
 
       <!-- FAQ -->
       <div class="spit-faqs">
       <div class="faq-section">
-      <h2>Car loan FAQs</h2>
+      <h1>FAQs</h1>
       <div class="faq">
-        <button class="faq-question">What is a Car Loan?</button>
-        <div class="faq-answer">A car loan is a financial product that helps you purchase a car with borrowed funds from a bank or financial institution.</div>
+        <button class="faq-question">What types of loans does SecureBank offer?</button>
+        <div class="faq-answer">SecureBank provides a wide range of loans including Home Loans, Personal Loans, Car Loans and Education Loans, under Government schemes like PMMY and Stand-Up India.</div>
       </div>
       <div class="faq">
-        <button class="faq-question">How do I apply for a Car Loan?</button>
-        <div class="faq-answer">You can apply online or visit your nearest bank branch. Documents like ID proof, address proof, and income proof are required.</div>
+        <button class="faq-question">How can I apply for a loan online with SecureBank?</button>
+        <div class="faq-answer">You can apply online through the SecureBank website. For selected loans, you can get instant e-approval with minimal documentation and a fully digital process.</div>
       </div>
       <div class="faq">
-        <button class="faq-question">Will I get 100% funding for purchasing a car?</button>
-        <div class="faq-answer">Banks usually provide 80–90% funding. Some institutions offer 100% for select vehicles.</div>
+        <button class="faq-question">What documents are needed to apply for Government loan schemes?</button>
+        <div class="faq-answer">Basic KYC, PAN (if available), income certificate, caste/education certificates (if applicable), Udyam registration, and a proposed project report are required for schemes like PMMY and GSS.</div>
       </div>
       <div class="faq">
-        <button class="faq-question">What's the maximum loan amount that can be taken for a new car?</button>
-        <div class="faq-answer">It depends on your income, credit score, and bank policy. Generally, up to ₹50 lakh can be sanctioned.</div>
+        <button class="faq-question">What factors affect Home Loan eligibility?</button>
+        <div class="faq-answer">Home loan eligibility is based on age (20–65 years for salaried individuals, 21–70 years for self-employed individuals), income, employment stability and credit score (ideally 750+) of the applicant.</div>
       </div>
       <div class="faq">
-        <button class="faq-question">What is the tenure of the loan to buy a new car?</button>
-        <div class="faq-answer">Tenure typically ranges from 12 months to 7 years.</div>
+        <button class="faq-question">What is the interest rate of an Education Loan?</button>
+        <div class="faq-answer">Interest rates vary based on the type of loan (secured / unsecured), applicant / co-applicant’s profile, institute / college category and type of course.</div>
       </div>
       <div class="faq">
-        <button class="faq-question">What is the minimum credit score required to get a Car Loan?</button>
-        <div class="faq-answer">Most banks require a credit score of 700+ for quick approval.</div>
+        <button class="faq-question">Does SecureBank offer top-up on an existing Personal Loan?</button>
+        <div class="faq-answer">Yes, SecureBank offers a top-up on an existing Personal Loan. To be eligible, you should be an SecureBank customer with an active Personal Loan and a good repayment history. </div>
       </div>
-      <a href="#" class="view-all">VIEW ALL FAQ’S</a>
     </div>
 
     <!-- Blog Section -->
-    <div class="blog-section">
-      <h2>Blogs</h2>
-      <span class="badge">Blogs</span>
-      <div class="blog-card">
-        <img src="https://via.placeholder.com/400x200.png?text=Car+Loan+Blog" alt="Car Loan Blog">
-        <h3>Sharing financial details for a car loan: An easy & secure process</h3>
-        <p class="meta">2 Mins Read | 6 Months Ago</p>
-        <a href="#" class="read-more">READ NOW</a>
-      </div>
+<div class="blog-section">
+  <h1>Blogs</h1>
+  <div class="blog-slider">
+    <div class="blog-card">
+      <img src="icons/blog1.jpg" alt="Loan Blog">
+      <h3>Advantages of Applying for Personal Loan Online</h3>
+      <p class="meta">3 Mins Read | 6 Months Ago</p>
+      <a href="https://www.adityabirlacapital.com/loans/blogs/personal-finance/advantages-applying-personal-loan-online" target="_blank" class="read-more">READ NOW</a>
     </div>
+    <div class="blog-card">
+      <img src="icons/blog2.jpg" alt="Loan Blog">
+      <h3>How to get personal loans to cover wedding cost</h3>
+      <p class="meta">2 Mins Read | 2 Months Ago</p>
+      <a href="https://www.adityabirlacapital.com/loans/blogs/personal-finance/personal-loans-cover-wedding-cost" class="read-more">READ NOW</a>
     </div>
+    <div class="blog-card">
+      <img src="icons/blog3.webp" alt="Loan Blog">
+      <h3>What is the Minimum Credit Score to get a Car Loan? </h3>
+      <p class="meta">4 Mins Read | 7 Month Ago</p>
+      <a href="https://www.moneycontrol.com/news/business/personal-finance/minimum-credit-score-to-get-a-car-loan-key-factors-to-know-for-quick-loan-approval-12882084.html" class="read-more">READ NOW</a>
+    </div>
+    <div class="blog-card">
+      <img src="icons/blog4.webp" alt="Loan Blog">
+      <h3>Does Your Co-Applicant Affect Your Personal Loan Eligibility </h3>
+      <p class="meta">5 Mins Read | 5 Months Ago</p>
+      <a href="https://www.livemint.com/money/personal-finance/personal-loan-co-applicant-can-it-increase-your-chances-of-getting-a-personal-loan-11742409311759.html" class="read-more">READ NOW</a>
+    </div>
+  </div>
+  <button class="slide-btn left">‹</button>
+  <button class="slide-btn right">›</button>
+</div>
 
-    <!-- Car Loan Content (hidden by default) -->
-    <div class="loan-content" data-loan="car" hidden>
-      <!-- Car loan EMI, Required Docs, How to Apply, FAQ similar to Home Loan -->
-      <h2>Car Loan EMI Calculator</h2>
-      <p>Content for Car Loan...</p>
-    </div>
-
-    <!-- Personal Loan Content (hidden by default) -->
-    <div class="loan-content" data-loan="personal" hidden>
-      <!-- Personal Loan EMI, Required Docs, How to Apply, FAQ similar to Home Loan -->
-      <h2>Personal Loan EMI Calculator</h2>
-      <p>Content for Personal Loan...</p>
-    </div>
-
-    <!-- Education Loan Content (hidden by default) -->
-    <div class="loan-content" data-loan="education" hidden>
-      <!-- Education Loan EMI, Required Docs, How to Apply, FAQ similar to Home Loan -->
-      <h2>Education Loan EMI Calculator</h2>
-      <p>Content for Education Loan...</p>
-    </div>
     
   </main>
 
@@ -237,6 +241,6 @@
     </div>
   </footer>
 
-  <script src="loan.js"></script>
+  <script src="./loan.js"></script>
 </body>
 </html>

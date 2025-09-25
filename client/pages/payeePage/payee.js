@@ -139,25 +139,6 @@ function validateAddPayee(data) {
     return valid;
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-document.getElementById('addPayeeForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = {
-        beneficiaryName: document.getElementById('beneficiaryName').value.trim(),
-        beneficiaryAccountNum: document.getElementById('beneficiaryAccountNum').value.trim(),
-        ifscCode: document.getElementById('ifscCode').value.trim()
-    };
-    if (validateAddPayee(data)) {
-        const savedPayee = await addPayeeApi(data);
-        if (savedPayee) {
-            renderPayeeList(savedPayee.payeeId);
-            showPayeeDetails(savedPayee);
-            e.target.reset();
-        }
-    }
-});
-});
-
 async function renderPayeeList(selectedId = null) {
     const payees = await fetchPayees();
     const ul = document.getElementById('payeeList');
@@ -169,7 +150,7 @@ async function renderPayeeList(selectedId = null) {
         li.classList.toggle('selected', payee.payeeId === selectedId);
         li.addEventListener('click', () => {
             showPayeeDetails(payee);
-            renderPayeeList(payee.payeeId);
+            // renderPayeeList(payee.payeeId);
         });
         ul.appendChild(li);
     });
@@ -321,25 +302,23 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPayeeList();
 
     document.getElementById('addPayeeForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const data = {
-        beneficiaryName: document.getElementById('beneficiaryName').value.trim(),
-        beneficiaryAccountNum: document.getElementById('beneficiaryAccountNum').value.trim(),
-        ifscCode: document.getElementById('ifscCode').value.trim()
-    };
+        const data = {
+            beneficiaryName: document.getElementById('beneficiaryName').value.trim(),
+            beneficiaryAccountNum: document.getElementById('beneficiaryAccountNum').value.trim(),
+            ifscCode: document.getElementById('ifscCode').value.trim()
+        };
 
-    console.log("Form data submitted:", data); // <-- Add this line to log data
+        console.log("Form data submitted:", data);
 
-    if (validateAddPayee(data)) {
-        const savedPayee = await addPayeeApi(data);
-        if (savedPayee) {
-            renderPayeeList(savedPayee.payeeId);
-            showPayeeDetails(savedPayee);
-            e.target.reset();
+        if (validateAddPayee(data)) {
+            const savedPayee = await addPayeeApi(data);
+            if (savedPayee) {
+                renderPayeeList(savedPayee.payeeId);
+                showPayeeDetails(savedPayee);
+                e.target.reset();
+            }
         }
-    }
+    });
 });
-
-});
-

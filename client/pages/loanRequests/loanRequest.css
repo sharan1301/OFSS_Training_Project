@@ -1,0 +1,119 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #025;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.form-container {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+main.form-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #003366;
+    font-size: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 10px;
+    border-radius: 6px;
+    border: 1px solid #000;
+    font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #025;
+    box-shadow: 0 0 0 2px rgba(0, 37, 85, 0.2);
+}
+
+.error-message {
+    color: #d93025;
+    font-size: 0.875rem;
+    margin-top: 4px;
+    min-height: 18px;
+}
+
+.input-error {
+    border-color: #d93025 !important;
+    box-shadow: 0 0 0 1px #d93025 inset;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #025;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #003366;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+@media (max-width: 500px) {
+    main.form-container {
+        padding: 30px 20px;
+        width: 95%;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+}

@@ -228,6 +228,9 @@ function displayUsers(usersToShow) {
     const statusClass = isFrozen ? 'frozen' : user.status.toLowerCase();
     const statusText = isFrozen ? 'Frozen' : capitalizeFirst(user.status || 'Active');
 
+    // Fixed card status logic - if card is blocked/disabled, show "Enable Card", if enabled show "Disable Card"
+    const isCardBlocked = user.cardStatus === 'disabled' || user.cardStatus === 'blocked';
+    
     row.innerHTML = `
         <td>${user.username}</td>
         <td>${user.accountNumber}</td>
@@ -240,9 +243,9 @@ function displayUsers(usersToShow) {
                     `<button class="btn btn-unfreeze" onclick="toggleFreeze(${user.accId}, false)">Unfreeze</button>` :
                     `<button class="btn btn-freeze" onclick="toggleFreeze(${user.accId}, true)">Freeze</button>`
                 }
-                ${user.cardStatus === 'enabled' ? 
-                    `<button class="btn btn-disable-card" onclick="toggleCard(${user.accId}, 'disabled')">Disable Card</button>` :
-                    `<button class="btn btn-enable-card" onclick="toggleCard(${user.accId}, 'enabled')">Enable Card</button>`
+                ${isCardBlocked ? 
+                    `<button class="btn btn-enable-card" onclick="toggleCard(${user.accId}, 'enabled')">Enable Card</button>` :
+                    `<button class="btn btn-disable-card" onclick="toggleCard(${user.accId}, 'disabled')">Disable Card</button>`
                 }
                 ${user.pendingLoan ? 
                     `<button class="btn btn-pending" onclick="viewPendingLoan(${user.id})">Pending Loan</button>` : 
@@ -323,6 +326,7 @@ async function toggleFreeze(userId, shouldFreeze) {
 // Toggle card enable/disable
 async function toggleCard(userId, newStatus) {
     const action = newStatus === 'enabled' ? 'enable' : 'disable';
+    const apiAction = newStatus === 'enabled' ? 'cards-enable' : 'cards-disable';
     
     if (!confirm(`Are you sure you want to ${action} this user's card?`)) {
         return;
@@ -331,25 +335,25 @@ async function toggleCard(userId, newStatus) {
     try {
         showLoading(true);
         
-        await apiCall(`admin/users/${userId}/card/${action}`, {
+        await apiCall(`admin/accounts/${userId}/${apiAction}`, {
             method: 'PUT'
         });
         
         // Update local user data
-        const user = users.find(u => u.userId === userId);
+        const user = users.find(u => u.accId === userId);
         if (user) {
             user.cardStatus = newStatus;
-            const allUser = allUsers.find(u => u.userId === userId);
+            const allUser = allUsers.find(u => u.accId === userId);
             if (allUser) allUser.cardStatus = newStatus;
         }
         
         displayUsers(users);
         showNotification(`Card has been ${action}d successfully!`, 'success');
-        showLoading(false);
         
     } catch (error) {
-        showLoading(false);
         showNotification(`Failed to ${action} card: ` + error.message, 'error');
+    } finally {
+        showLoading(false);
     }
 }
 
@@ -501,7 +505,7 @@ async function approveLoan(loanId) {
         });
         
         // Remove from local array and update user status
-        const loanIndex = loanRequests.findIndex(request => request.requestIdid === loanId);
+        const loanIndex = loanRequests.findIndex(request => request.requestId === loanId);
         if (loanIndex !== -1) {
             const approvedLoan = loanRequests[loanIndex];
             
@@ -521,11 +525,11 @@ async function approveLoan(loanId) {
         
         displayPendingRequests();
         displayUsers(users);
-        showLoading(false);
         
     } catch (error) {
-        showLoading(false);
         showNotification('Failed to approve loan: ' + error.message, 'error');
+    } finally {
+        showLoading(false);
     }
 }
 
@@ -563,11 +567,11 @@ async function declineLoan(loanId) {
         
         displayPendingRequests();
         displayUsers(users);
-        showLoading(false);
         
     } catch (error) {
-        showLoading(false);
         showNotification('Failed to decline loan: ' + error.message, 'error');
+    } finally {
+        showLoading(false);
     }
 }
 

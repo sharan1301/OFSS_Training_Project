@@ -1,4 +1,4 @@
-const token =localStorage.getItem("jwtToken");
+const token =localStorage.getItem("userToken");
 if(!token){
     window.location.href="../loginPage/login.html"
 }
@@ -104,29 +104,29 @@ async function submitApplication(event) {
 
   const data = {
     fullName: document.getElementById("fullName").value,
-    dateOfBirth: document.getElementById("dateOfBirth").value,
-    gender: document.getElementById("gender").value,
+   /* dateOfBirth: document.getElementById("dateOfBirth").value,
+    gender: document.getElementById("gender").value,*/
     mobileNumber: document.getElementById("mobileNumber").value,
     emailAddress: document.getElementById("emailAddress").value,
     panNumber: document.getElementById("panNumber").value,
     aadhaarNumber: document.getElementById("aadhaarNumber").value,
-    address: document.getElementById("address").value,
+   /* address: document.getElementById("address").value,
     pincode: document.getElementById("pincode").value,
     city: document.getElementById("city").value,
-    state: document.getElementById("state").value,
+    state: document.getElementById("state").value,*/
     occupation: document.getElementById("occupation").value,
-    employer: document.getElementById("employer").value,
+   // employer: document.getElementById("employer").value,
     annualIncome: parseFloat(document.getElementById("annualIncome").value),
     cardType: document.getElementById("cardType").value,
     paymentMethod: document.getElementById("paymentMethod").value
   };
   
-  const token = localStorage.getItem("jwtToken");
+  const token = localStorage.getItem("userToken");
 
-  const username = "user"; // or "admin"
-  const password = "1234"; 
+  // const username = "user"; // or "admin"
+  // const password = "1234"; 
   try {
-    const res = await fetch("http://localhost:8080/credit-card/apply", {
+    const res = await fetch("http://localhost:8080/users/credit-card/apply", {
       method: "POST",
       headers: { "Content-Type": "application/json",
                 // "Authorization": "Basic " + btoa(username + ":" + password),
@@ -160,12 +160,12 @@ function checkStatus() {
     // Clear previous result
     resultDiv.innerHTML = "";
 
-    const username = "user"; // or "admin"
-    const password = "1234";
+    // const username = "user"; // or "admin"
+    // const password = "1234";
     
-    const token = localStorage.getItem("jwtToken"); 
+    const token = localStorage.getItem("userToken"); 
 
-    fetch(`http://localhost:8080/credit-card/status/${aadhaar}`, {
+    fetch(`http://localhost:8080/users/credit-card/status/${aadhaar}`, {
         method: "GET",
         headers: {
             // "Authorization": "Basic " + btoa(username + ":" + password),
@@ -214,6 +214,82 @@ function checkStatus() {
     return false;
 }
 
+async function loadUserCards() {
+  try {
+    const custId = localStorage.getItem("custId");
+    if (!custId) {
+      document.getElementById("yourCardsContainer").innerHTML =
+        "<p>No user found. Please log in.</p>";
+      return;
+    }
+    // const username = "user";
+    // const password = "1234";
+    // const basicAuth = btoa(username + ":" + password);
+    
+    const response = await fetch(`http://localhost:8080/users/cards/customer/${custId}`, {
+      method: "GET",
+      headers: {
+       "Authorization": token ? `Bearer ${token}` : "" ,
+        "Content-Type": "application/json"
+      }
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch cards");
+    }
+    const cards = await response.json();
+    const container = document.getElementById("yourCardsContainer");
+    container.innerHTML = "";
+    if (cards.length === 0) {
+      container.innerHTML = "<p>No cards found for this user.</p>";
+      return;
+    }
+    const section = document.createElement("section");
+    section.classList.add("creditcards-section");
+    const row = document.createElement("div");
+    row.classList.add("creditcards-row");
+    section.appendChild(row);
+    cards.forEach(card => {
+      let frontClass = "card-front";
+      if (card.cardType.toUpperCase() === "GOLD") frontClass = "card-front2";
+      if (card.cardType.toUpperCase() === "PLATINUM") frontClass = "card-front3";
+      const cardDiv = document.createElement("div");
+      cardDiv.classList.add("creditcard-card");
+      cardDiv.innerHTML = `
+        <div class="card-img-container">
+          <div class="card-img-container">
+            <div class="card-container">
+              <div class="card-face ${frontClass}">
+                <div class="shine"></div>
+                <div class="chip"></div>
+                <div class="card-number">${card.cardNumber.replace(/\d{12}(\d{4})/, "XXXX XXXX XXXX $1")}</div>
+                <div class="card-holder">
+                  <div>
+                    <div class="expiry-title">Expires</div>
+                    <div class="expiry">${card.expiryDate}</div>
+                  </div>
+                  <div>
+                    <div class="cvv-title">CVV</div>
+                    <div class="cvv">${card.cvv || "XXX"}</div>
+                  </div>
+                </div>
+                <div class="brand">
+                  <div class="brand-name">${card.cardType}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      row.appendChild(cardDiv);
+    });
+    container.appendChild(section);
+  } catch (err) {
+    console.error(err);
+    document.getElementById("yourCardsContainer").innerHTML =
+      "<p>Error loading your cards.</p>";
+  }
+}
+loadUserCards();
 
 
 

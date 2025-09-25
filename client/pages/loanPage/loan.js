@@ -1,13 +1,10 @@
-/* ========= Loan Page JS ========= */
-
 document.getElementById('helpBtn').addEventListener('click', function () {
   document.querySelector('.card.categories').scrollIntoView({ behavior: 'smooth' });
 });
 
-document.getElementById('eligibility').addEventListener('click', function () {
-  document.querySelector('.split').scrollIntoView({ behavior: 'smooth' });
-});
-
+ function redirectToPage() {
+    window.location.href = "loanRequest.html";
+  }
 const toggleBtn = document.getElementById('toggleBtn');
 const loanInfo = document.getElementById('loanInfo');
 const dropdownText = document.getElementById('dropdownText');
@@ -23,14 +20,13 @@ readLess.addEventListener('click', () => {
   loanInfo.style.display = "block";
 });
 
-// Loan Categories
-const loanCards = document.querySelectorAll(".loan-card");
-const loanContents = document.querySelectorAll(".loan-content");
-const loanTitle = document.getElementById("loanTitle"); // <h2 id="loanTitle"> inside calculator
 
 // EMI Calculator Elements
 const loanAmount = document.getElementById("loanAmount");
 const interestRate = document.getElementById("interestRate");
+const customLoanAmount = document.getElementById("customLoanAmount");
+const customInterestRate = document.getElementById("customInterestRate");
+
 const amountDisplay = document.getElementById("amountDisplay");
 const rateDisplay = document.getElementById("rateDisplay");
 const emiDisplay = document.getElementById("emi");
@@ -38,7 +34,7 @@ const totalInterestDisplay = document.getElementById("totalInterest");
 const totalPaymentDisplay = document.getElementById("totalPayment");
 const scheduleBody = document.getElementById("scheduleBody");
 
-let duration = 6; // default months
+let duration = 6;
 
 // Format numbers
 const formatNumber = (num) =>
@@ -50,6 +46,8 @@ function calculateEMI() {
   const annualRate = parseFloat(interestRate.value);
   const R = annualRate / 12 / 100;
   const N = duration;
+
+  if (!P || !R || !N) return;
 
   const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
   const totalPayment = emi * N;
@@ -64,6 +62,7 @@ function calculateEMI() {
 
 // Repayment Schedule
 function generateSchedule(P, R, N, emi) {
+  if (!scheduleBody) return;
   scheduleBody.innerHTML = "";
   let balance = P;
 
@@ -83,18 +82,55 @@ function generateSchedule(P, R, N, emi) {
   }
 }
 
-// Update values
+// --- Sliders + Custom Inputs ---
+
+// Loan Amount Slider
 loanAmount.addEventListener("input", () => {
-  amountDisplay.textContent = formatNumber(parseInt(loanAmount.value));
+  const val = parseInt(loanAmount.value);
+  amountDisplay.textContent = formatNumber(val);
+  customLoanAmount.value = val;
   calculateEMI();
 });
 
+// Custom Loan Amount Input
+customLoanAmount.addEventListener("input", (e) => {
+  if (e.target.value) {
+    let val = parseInt(e.target.value);
+
+    // Clamp to slider range
+    if (val < parseInt(loanAmount.min)) val = parseInt(loanAmount.min);
+    if (val > parseInt(loanAmount.max)) val = parseInt(loanAmount.max);
+
+    loanAmount.value = val;
+    amountDisplay.textContent = formatNumber(val);
+    calculateEMI();
+  }
+});
+
+// Interest Rate Slider
 interestRate.addEventListener("input", () => {
-  rateDisplay.textContent = `${interestRate.value}%`;
+  const val = parseFloat(interestRate.value);
+  rateDisplay.textContent = `${val}%`;
+  customInterestRate.value = val;
   calculateEMI();
 });
 
-// Duration buttons
+// Custom Interest Rate Input
+customInterestRate.addEventListener("input", (e) => {
+  if (e.target.value) {
+    let val = parseFloat(e.target.value);
+
+    // Clamp to slider range
+    if (val < parseFloat(interestRate.min)) val = parseFloat(interestRate.min);
+    if (val > parseFloat(interestRate.max)) val = parseFloat(interestRate.max);
+
+    interestRate.value = val;
+    rateDisplay.textContent = `${val}%`;
+    calculateEMI();
+  }
+});
+
+// --- Duration Buttons ---
 document.querySelectorAll(".duration-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".duration-btn").forEach(b => b.classList.remove("active"));
@@ -116,49 +152,34 @@ document.getElementById("customDuration").addEventListener("input", (e) => {
   calculateEMI();
 });
 
-// Toggle schedule
-document.querySelector(".toggle-schedule").addEventListener("click", () => {
-  const schedule = document.querySelector(".schedule-table");
-  schedule.style.display = schedule.style.display === "none" ? "block" : "none";
-});
-
-// Loan defaults when switching category
-const loanDefaults = {
-  home: { min: 100000, max: 10000000, step: 50000, rate: 8.5, title: "Home Loan EMI Calculator" },
-  car: { min: 100000, max: 5000000, step: 25000, rate: 9.0, title: "Car Loan EMI Calculator" },
-  personal: { min: 50000, max: 2000000, step: 10000, rate: 12.5, title: "Personal Loan EMI Calculator" },
-  education: { min: 50000, max: 5000000, step: 20000, rate: 10.5, title: "Education Loan EMI Calculator" }
-};
-
-loanCards.forEach(card => {
-  card.addEventListener("click", () => {
-    const selectedLoan = card.dataset.loan;
-
-    // Highlight active card
-    loanCards.forEach(c => c.setAttribute("aria-expanded", "false"));
-    card.setAttribute("aria-expanded", "true");
-
-    // Hide/show content section
-    loanContents.forEach(content => {
-      content.hidden = content.dataset.loan !== selectedLoan;
+// --- Quick-select labels ---
+function attachRangeLabels(slider, labels) {
+  labels.querySelectorAll("span").forEach(label => {
+    label.addEventListener("click", () => {
+      const value = label.dataset.value;
+      slider.value = value;
+      slider.dispatchEvent(new Event("input")); // sync slider + custom input
     });
+  });
+}
 
-    // Apply defaults
-    const defaults = loanDefaults[selectedLoan];
-    if (defaults) {
-      loanTitle.textContent = defaults.title;
-      loanAmount.min = defaults.min;
-      loanAmount.max = defaults.max;
-      loanAmount.step = defaults.step;
-      loanAmount.value = defaults.min;
-      amountDisplay.textContent = formatNumber(defaults.min);
+const loanAmountLabels = document.getElementById("loanAmountLabels");
+attachRangeLabels(loanAmount, loanAmountLabels);
 
-      interestRate.value = defaults.rate;
-      rateDisplay.textContent = `${defaults.rate}%`;
-      calculateEMI();
-    }
+const interestRateLabels = document.getElementById("interestRateLabels");
+attachRangeLabels(interestRate, interestRateLabels);
+
+// --- Toggle schedule ---
+document.querySelectorAll(".toggle-schedule").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const schedule = btn.nextElementSibling;
+    schedule.style.display = schedule.style.display === "none" ? "block" : "none";
   });
 });
+
+// Initial Calculation
+calculateEMI();
+
 
 // Required Documents Tabs
 const salariedBtn = document.querySelector('[data-doc="salaried"]');
@@ -166,46 +187,50 @@ const selfBtn = document.querySelector('[data-doc="self"]');
 const docSalaried = document.getElementById("hlDocSalaried");
 const docSelf = document.getElementById("hlDocSelf");
 
-salariedBtn.addEventListener("click", () => {
-  salariedBtn.classList.add("active");
-  selfBtn.classList.remove("active");
-  docSalaried.hidden = false;
-  docSelf.hidden = true;
-});
-
-selfBtn.addEventListener("click", () => {
-  selfBtn.classList.add("active");
-  salariedBtn.classList.remove("active");
-  docSelf.hidden = false;
-  docSalaried.hidden = true;
-});
-
-// FAQ Accordion
-document.querySelectorAll(".faq-question").forEach(btn => {
-  btn.addEventListener("click", () => {
-    btn.classList.toggle("active");
-    const answer = btn.nextElementSibling;
-    answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+if (salariedBtn && selfBtn) {
+  salariedBtn.addEventListener("click", () => {
+    salariedBtn.classList.add("active");
+    selfBtn.classList.remove("active");
+    docSalaried.hidden = false;
+    docSelf.hidden = true;
   });
-});
 
-// Blog Slider
-const slides = document.querySelectorAll(".blog-slide");
-let currentSlide = 0;
-
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
+  selfBtn.addEventListener("click", () => {
+    selfBtn.classList.add("active");
+    salariedBtn.classList.remove("active");
+    docSelf.hidden = false;
+    docSalaried.hidden = true;
   });
 }
-document.getElementById("prev").addEventListener("click", () => {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  showSlide(currentSlide);
-});
-document.getElementById("next").addEventListener("click", () => {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
+
+// FAQ Accordion
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener("click", () => {
+    const faq = button.parentElement;
+    faq.classList.toggle("open");
+
+    const answer = faq.querySelector(".faq-answer");
+    if (faq.classList.contains("open")) {
+      answer.style.display = "block";
+    } else {
+      answer.style.display = "none";
+    }
+  });
 });
 
-// Initialize with Home Loan
+const slider = document.querySelector(".blog-slider");
+const leftBtn = document.querySelector(".slide-btn.left");
+const rightBtn = document.querySelector(".slide-btn.right");
+
+const cardWidth = document.querySelector(".blog-card").offsetWidth + 20; 
+
+leftBtn.addEventListener("click", () => {
+  slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
+});
+
+rightBtn.addEventListener("click", () => {
+  slider.scrollBy({ left: cardWidth, behavior: "smooth" });
+});
+
+
 calculateEMI();

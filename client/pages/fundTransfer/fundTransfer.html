@@ -46,15 +46,25 @@
           <span class="text">Bank Transfer</span>
           <span class="arrow">➝</span>
         </div>
+        <!-- ✅ New AutoPay button -->
+        <div class="method" onclick="selectMethod('autopay', this)">
+          <span class="icon">🔄</span>
+          <span class="text">AutoPay</span>
+          <span class="arrow">➝</span>
+        </div>
       </div>
     </div>
 
     <div id="dynamicFormContainer"></div>
   </div>
 
+  
+
+
+
   <script>
     let accountData = null;
-const token = localStorage.getItem("jwtToken");
+const token = localStorage.getItem("userToken");
 
 if (!token) {
   window.location.href = "../loginPage/login.html";
@@ -72,7 +82,7 @@ let payeesList = [];
   try {
     const res = await fetch(`http://localhost:8080/accounts/${accountId}`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`, // Add Authorization header
       }
     });
 
@@ -92,9 +102,9 @@ let payeesList = [];
   }
 
   try {
-    const res = await fetch(`http://localhost:8080/payees/account/${accountData.accountId}`, {
+    const res = await fetch(`http://localhost:8080/users/payees/account/${accountData.accountId}`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`, // Add Authorization header
       }
     });
     if (!res.ok) return [];
@@ -114,11 +124,11 @@ let payeesList = [];
 
   try {
 
-    
-    const res = await fetch(`http://localhost:8080/accounts/by-custid/${custId}`, {
+    const encodedCustId = encodeURIComponent(custId);
+    const res = await fetch(`http://localhost:8080/users/accounts/by-custid/${encodedCustId}`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Add Authorization header
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`, // Add Authorization header
       }
     });
 
@@ -235,8 +245,59 @@ let payeesList = [];
             <button type="submit" class="btn submit-btn">Transfer</button>
           </form>
         `;
+
       }
-    }
+    //   else if (method === 'autopay',async e=>{
+    //     const autopayTo = form.querySelector('#autopayTo').value.trim();
+    //   const amt = form.querySelector('#autopayAmount').value.trim();
+    //   const freq = form.querySelector('#autopayFrequency').value;
+    //   if (!autopayTo || !amt) return alert('Enter valid details!');
+    //   payload = {
+    //     account: { accountNumber: defaultFromAccount },
+    //     recvAcc: { accountNumber: autopayTo },
+    //     amount: Number(amt),
+    //     frequency: freq
+    //   };
+    //   await sendTransfer(payload, 'autopay');
+    // }
+    //  );
+    else if (method === 'autopay') {
+  return `
+    <form id="autopayTransferForm" class="transfer-details">
+      <h3>AutoPay Setup</h3>
+      <div class="input-group">
+        <label>From Account</label>
+        <input type="text" value="${defaultFromAccount}" readonly>
+      </div>
+      <div class="input-group">
+        <label>Receiver Payee Account</label>
+        <input type="text" id="autopayTo" placeholder="Enter receiver account number">
+      </div>
+      <div class="input-group">
+        <label>Amount (₹)</label>
+        <input type="number" id="autopayAmount" placeholder="Enter amount">
+      </div>
+      <div class="input-group">
+        <label>Frequency (seconds)</label>
+        <input type="number" id="autopayFrequency" placeholder="Enter frequency in seconds">
+      </div>
+      <div class="input-group">
+        <label>Start Date & Time</label>
+        <input type="datetime-local" id="autopayStartDate">
+      </div>
+      <div class="input-group">
+        <label>End Date & Time</label>
+        <input type="datetime-local" id="autopayEndDate">
+      </div>
+      <button type="submit" class="btn submit-btn">Set AutoPay</button>
+    </form>
+  `;
+}
+
+     } 
+    
+      
+    
 
     async function selectMethod(method, element) {
       document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
@@ -311,20 +372,20 @@ let payeesList = [];
 
   async function sendTransfer(payload, type) {
   let url = '';
-  if (type === 'self') url = 'http://localhost:8080/transfers/self';
-  else if (type === 'payee') url = 'http://localhost:8080/transfers/payee';
-  else if (type === 'manual') url = 'http://localhost:8080/transfers/bank';
-
-  const username = "user";
-  const password = "1234";
-  const base64Credentials = btoa(username + ":" + password);
+  if (type === 'self') url = 'http://localhost:8080/users/transfers/self';
+  else if (type === 'payee') url = 'http://localhost:8080/users/transfers/payee';
+  else if (type === 'manual') url = 'http://localhost:8080/users/transfers/bank';
+  else if (type === 'autopay') url = 'http://localhost:8080/autopay/create';
+  // const username = "user";
+  // const password = "1234";
+  // const base64Credentials = btoa(username + ":" + password);
 
   try {
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + base64Credentials,  // Add Basic Authentication header
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`  // Add Basic Authentication header
       },
       body: JSON.stringify(payload)
     });

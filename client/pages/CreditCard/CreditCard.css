@@ -251,13 +251,13 @@ h1 {
 .creditcard-card {
     max-width: 450px; /* fixed width */
     width: 100%;
-    background: #fff;
+    
     border-radius: 22px;
     padding: 0; /* REMOVE horizontal padding to avoid shrinking */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    background: var(--background);
+    
     padding-top: 0;
     margin-top: 0;
     padding: 0rem 1.2rem 1.2rem 1.2rem;
