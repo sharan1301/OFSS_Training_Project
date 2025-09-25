@@ -326,7 +326,7 @@ async function approveRequest(type, requestId) {
         
         const endpoint = type === 'account' 
             ? `admin/requests/${requestId}/approve` 
-            : `admin/creditcard-requests/${requestId}/approve`;
+            : `admin/creditcard-requests/${requestId}/handle`;
         
         await apiCall(endpoint, {
             method: 'PUT',
@@ -511,6 +511,8 @@ function showElementIfExists(elementId, value) {
 async function approveUserFromModal() {
     if (currentUser) {
         const id = currentUser.type === 'account' ? currentUser.requestId : currentUser.id;
+        console.log('Modal approve - currentUser:', currentUser);
+        console.log('Modal approve - using id:', id);
         await approveRequest(currentUser.type, id);
     }
 }
@@ -518,6 +520,8 @@ async function approveUserFromModal() {
 async function declineUserFromModal() {
     if (currentUser) {
         const id = currentUser.type === 'account' ? currentUser.requestId : currentUser.id;
+        console.log('Modal decline - currentUser:', currentUser);
+        console.log('Modal decline - using id:', id);
         await declineRequest(currentUser.type, id);
     }
 }
