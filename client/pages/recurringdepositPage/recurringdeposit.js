@@ -202,7 +202,9 @@ function showAllRecurringDeposits() {
         return;
     }
 
-    return fetch(`http://localhost:8080/users/RecurringDeposit/rdshowall/${userId}?date=${entryDate}`, {
+    const userId = localStorage.getItem("userId");
+
+    return fetch(`http://localhost:8080/users/RecurringDeposit/${userId}/rdshowall?date=${entryDate}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

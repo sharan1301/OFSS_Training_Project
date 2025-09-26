@@ -251,8 +251,9 @@ function showAllFixedDeposits() {
     }
 
     const userId = localStorage.getItem("userId");
+    console.log("Fetching FDs for userId:", userId, "from date:", entryDate);
     // Make request to Spring Boot backend
-    fetch(`http://localhost:8080/users/fdshowall/${userId}?date=${entryDate}`, {
+    fetch(`http://localhost:8080/users/FixedDeposit/${userId}/fdshowall?date=${entryDate}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

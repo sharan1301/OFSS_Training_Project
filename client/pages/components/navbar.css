@@ -45,3 +45,13 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.announce-btn {
+    background: var(--accent);
+    color: var(--background);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
