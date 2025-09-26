@@ -75,6 +75,7 @@ document.getElementById("password-form").addEventListener("submit", function (e)
         if (data.token) {
           localStorage.setItem("jwtToken", data.token);  // Store JWT token
           localStorage.setItem("custId", custId); // :key: save token
+          localStorage.setItem("userId", data.user.id);  
           alert("Login successful!");
           setTimeout(() => window.location.href = "../dashBoardPage/accounts.html", 1000);
         } else {

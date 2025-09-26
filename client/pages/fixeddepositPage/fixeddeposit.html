@@ -36,7 +36,7 @@
         <div class="form-row">
             <div class="form-group"> 
                 <label class="form-label">User ID <span class="required">*</span></label> 
-                <input type="number" class="form-input" id="userId" > 
+                <input type="number" class="form-input" id="userId" readonly> 
             </div>
         </div>
 
@@ -153,6 +153,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const storedUserId = localStorage.getItem("userId"); 
+        if (storedUserId) {
+            document.getElementById("userId").value = storedUserId;
+        }
+    });
+    </script>
 
      <script src="fixeddeposit.js"></script>
 </body>

@@ -54,7 +54,7 @@ const fixedDeposits = [
 
 
 let registrationEntryDate = null;
-let authToken = null; // store JWT token here
+let authToken = localStorage.getItem("jwtToken"); // store JWT token here
 
 function toggleRegisterForm() {
     const form = document.getElementById('registerForm');
@@ -133,7 +133,7 @@ function submitRegistration() {
         return;
     }
 
-    const userId = document.getElementById('userId').value;
+    const userId = localStorage.getItem("userId");
     const accountId = document.getElementById('accountId').value;
     const depositAmount = parseFloat(document.getElementById('depositAmount').value);
     const interestRate = parseFloat(document.getElementById('interestRate').value);
@@ -250,8 +250,9 @@ function showAllFixedDeposits() {
         return;
     }
 
+    const userId = localStorage.getItem("userId");
     // Make request to Spring Boot backend
-    fetch(`http://localhost:8080/users/FixedDeposit/showall?date=${entryDate}`, {
+    fetch(`http://localhost:8080/users/fdshowall/${userId}?date=${entryDate}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

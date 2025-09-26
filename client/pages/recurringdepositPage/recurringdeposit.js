@@ -32,7 +32,7 @@ let currentrdId = null;
 let currentPayRdId = null;
 let registrationEntryDate = null;
 let rdIdCounter = 903;
-let authToken = null;
+let authToken = localStorage.getItem("jwtToken");
 
 function toggleRegisterForm() {
     const form = document.getElementById('registerForm');
@@ -104,7 +104,7 @@ function submitRegistration() {
         });
         return;
     }
-    const userId = document.getElementById('userId').value;
+    const userId = localStorage.getItem("userId");
     const accountId = document.getElementById('accountId').value;
     const monthlyAmount = parseFloat(document.getElementById('monthlyAmount').value);
     const interestRate = parseFloat(document.getElementById('interestRate').value);
@@ -202,7 +202,7 @@ function showAllRecurringDeposits() {
         return;
     }
 
-    return fetch(`http://localhost:8080/users/RecurringDeposit/showall?date=${entryDate}`, {
+    return fetch(`http://localhost:8080/users/RecurringDeposit/rdshowall/${userId}?date=${entryDate}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
