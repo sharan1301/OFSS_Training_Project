@@ -156,8 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         short: [
             { title: 'Short-term Bonds', desc: 'Stable income in 1-3 years', arrow: true },
-            { title: 'Liquid Mutual Funds', desc: 'Instant withdrawal and low risk', arrow: true },
-            { title: 'Recurring Deposit', desc: 'Save and earn moderate returns', arrow: true }
+            { title: 'Liquid Mutual Funds', desc: 'Instant withdrawal and low risk', arrow: true }
         ],
         long: [
             { title: 'Equity Mutual Funds', desc: 'Capital appreciation over long term', arrow: true },
@@ -177,8 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="discover-card-title">${card.title} <span class="arrow">${card.arrow ? '↗' : ''}</span></div>
                 <div class="discover-card-desc">${card.desc}</div>
                 <div class="discover-card-actions">
-                    <button>INVEST</button>
-                    <button>DETAILS</button>
+                    <button>UPDATING SOON ... </button>
                 </div>
             `;
             row.appendChild(cardDiv);
